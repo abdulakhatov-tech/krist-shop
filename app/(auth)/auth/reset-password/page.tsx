@@ -1,5 +1,7 @@
+import ResetPasswordPageView from "@/views/auth/reset-password";
+
 const ResetPassword = () => {
-	return <div>ResetPassword</div>;
+	return <ResetPasswordPageView />;
 };
 
 export default ResetPassword;

@@ -31,12 +31,17 @@ const useForgotPasswordPageViewFeatures = () => {
 			const { success, message, data } = await forgotPassword(values);
 
 			if (success) {
-				toast(message || "Send you one-time OTP code!");
-				localStorage.setItem("otp_code", JSON.stringify(data));
+				toast(message || "Sent you one-time OTP code!");
 
+				// Store data in localStorage (after navigation)
+				localStorage.setItem("otp_code", JSON.stringify(data));
 				localStorage.setItem("identifier", values.identifier);
+
+				// Navigate before resetting form to avoid delay
+				router.replace("/auth/verify-otp");
+
+				// Reset the form after navigation
 				reset();
-				router.push("/auth/verify-otp");
 			} else {
 				toast("Failed to send OTP code!");
 			}
