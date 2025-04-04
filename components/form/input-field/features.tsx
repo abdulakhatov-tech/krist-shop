@@ -1,3 +1,5 @@
+"use client";
+
 import type { FieldValues } from "react-hook-form";
 
 import { isEmail } from "@/utils/helper-fns/email";
