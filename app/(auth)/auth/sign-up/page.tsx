@@ -1,5 +1,7 @@
-const SignUp = () => {
-	return <div>SignUp</div>;
+import SignUpPageView from "@/views/auth/sign-up";
+
+const SignUpPage = () => {
+	return <SignUpPageView />;
 };
 
-export default SignUp;
+export default SignUpPage;
