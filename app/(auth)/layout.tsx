@@ -1,8 +1,8 @@
-import AuthLayoutWrapper from "@/layouts/auth.layout";
-import ProtectedLayout from "@/layouts/protected.layout";
 import type { Metadata } from "next";
 import type React from "react";
 import type { ReactNode } from "react";
+
+import { AuthLayoutWrapper, ProtectedLayout } from "@/layouts";
 
 export const metadata: Metadata = {
 	title: {

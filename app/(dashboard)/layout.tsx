@@ -1,7 +1,9 @@
-import ProtectedLayout from "@/layouts/protected.layout";
 import type { Metadata } from "next";
 import type React from "react";
 import type { ReactNode } from "react";
+
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { DashboardNavbar, DashboardSidebar, ProtectedLayout } from "@/layouts";
 
 export const metadata: Metadata = {
 	title: {
@@ -23,8 +25,20 @@ export const metadata: Metadata = {
 const DashboardLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
 		<ProtectedLayout>
-			<aside>Aside</aside>
-			<main>{children}</main>
+			<SidebarProvider>
+				<DashboardSidebar />
+
+				<div className="w-full">
+					<DashboardNavbar />
+
+					<main
+						className="p-4 md:p-5"
+						style={{ minHeight: "calc(100vh - 56px)" }}
+					>
+						{children}
+					</main>
+				</div>
+			</SidebarProvider>
 		</ProtectedLayout>
 	);
 };
