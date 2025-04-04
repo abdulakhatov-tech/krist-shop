@@ -1,0 +1,4 @@
+echo "Checking your commit message..."
+npx --no -- commitlint --edit ${1}
+
+echo "✅✅✅ Tasks completed! Code commited, ready for pushing to GitHub."

@@ -1,0 +1,18 @@
+set -e # Skriptni xatolik yuz bersa to'xtatish
+
+echo "🔍 Running Biome format (auto-fixing code)..."
+npx @biomejs/biome format --write .
+
+echo "✅ Running Biome check (fixing issues)..."
+npx @biomejs/biome check --write .
+
+echo "🔬 Running Biome lint (auto-linting code)..."
+npx @biomejs/biome lint --write .
+
+# Git diff bilan tekshirish (faqat agar kerak bo'lsa)
+if ! git diff --quiet; then
+  echo "⚠️  Some files were modified after running Biome. Please review the changes before committing."
+  exit 1
+fi
+
+echo "🚀 All Biome checks passed!"
