@@ -56,7 +56,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 		totalPages: 23,
 	};
 
-	const { role, searchable, datePicker } = actions;
+	const { role, searchable } = actions;
 
 	return (
 		<section id="user-table" className="w-full">
