@@ -17,7 +17,7 @@ interface PropsI<TData> {
 const useRowActionsAllFeatures = <TData extends { id: string }>({
 	table,
 }: PropsI<TData>) => {
-	const pathname = usePathname();
+	// const pathname = usePathname();
 
 	const [open, setOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ const useRowActionsAllFeatures = <TData extends { id: string }>({
 		try {
 			setLoading(true);
 
-			const deletionPromises: Promise<string>[] = [];
+			// const deletionPromises: Promise<string>[] = [];
 
 			// if (pathname.includes("users")) {
 			// 	deletionPromises = filteredRows.map(
