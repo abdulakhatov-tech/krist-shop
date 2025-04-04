@@ -1,3 +1,5 @@
+"use client";
+
 import { Camera } from "lucide-react";
 import Image from "next/image";
 import type { FieldValues } from "react-hook-form";
