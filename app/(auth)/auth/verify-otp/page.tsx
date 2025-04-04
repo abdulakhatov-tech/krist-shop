@@ -1,5 +1,7 @@
+import VerifyOtpPageView from "@/views/auth/verify-otp";
+
 const VerifyOtp = () => {
-	return <div>VerifyOtp</div>;
+	return <VerifyOtpPageView />;
 };
 
 export default VerifyOtp;
