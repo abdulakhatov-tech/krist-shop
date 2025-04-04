@@ -2,7 +2,7 @@
 
 import type { Table } from "@tanstack/react-table";
 import { isAxiosError } from "axios";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
