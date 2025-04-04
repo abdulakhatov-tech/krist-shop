@@ -40,7 +40,7 @@ const SignInPageView = () => {
 
 					{/* Forgot Password */}
 					<Link
-						href="/forgot-password"
+						href="/auth/forgot-password"
 						className="hover:text-blue-500 hover:underline"
 					>
 						Forgot Password ?

@@ -1,5 +1,7 @@
+import ForgotPasswordPageView from "@/views/auth/forgot-password";
+
 const ForgotPassword = () => {
-	return <div>ForgotPassword</div>;
+	return <ForgotPasswordPageView />;
 };
 
 export default ForgotPassword;
