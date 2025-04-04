@@ -1,3 +1,4 @@
+import ProtectedLayout from "@/layouts/protected.layout";
 import type { Metadata } from "next";
 import type React from "react";
 import type { ReactNode } from "react";
@@ -21,10 +22,10 @@ export const metadata: Metadata = {
 
 const DashboardLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
-		<>
+		<ProtectedLayout>
 			<aside>Aside</aside>
 			<main>{children}</main>
-		</>
+		</ProtectedLayout>
 	);
 };
 
