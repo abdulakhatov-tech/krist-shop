@@ -46,7 +46,7 @@ const FormUploadField = <T extends FieldValues>({
 										<Image
 											src={
 												preview ||
-												(typeof noImage === "string" ? noUser : noUser.src)
+												(typeof noImage === "string" ? noUser : noUser)
 											}
 											className={cn(
 												"object-cover rounded-full w-[100px] h-[100px] md:w-[120px] md:h-[120px] border border-solid",
