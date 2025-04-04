@@ -1,4 +1,3 @@
-import React from "react";
 import type { Control, FieldValues } from "react-hook-form";
 
 import { Checkbox } from "@/components/ui/checkbox";

@@ -1,4 +1,3 @@
-import type React from "react";
 import type { FieldValues } from "react-hook-form";
 
 import { isEmail } from "@/utils/helper-fns/email";
