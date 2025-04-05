@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Plus } from "lucide-react";
@@ -29,12 +31,12 @@ const DataTableAddData = ({ loading = false }: { loading: boolean }) => {
 	return (
 		<Link href={generateUrl()}>
 			<Button
-				size="sm"
+				size="default"
 				className={
 					"hover:scale-95 bg-[#001529] hover:bg-blue-700 active:bg-blue-800"
 				}
 			>
-				<Plus />
+				<Plus className="!w-5 !h-5" />
 			</Button>
 		</Link>
 	);

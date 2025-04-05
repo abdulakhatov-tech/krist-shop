@@ -25,6 +25,7 @@ import {
 	SearchData,
 	UserRoles,
 } from "./customs";
+import FilterByPrice from "./customs/filter-by-price";
 import type { DataTableProps } from "./interface";
 import {
 	DataTableLimitLoading,
@@ -72,6 +73,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 
 				<div className="flex items-center gap-2">
 					{searchable && <SearchData loading={loading} />}
+					<FilterByPrice />
 					{role && <UserRoles loading={loading} />}
 					{filterByCategory && <DataTableFilterByCategory />}
 					{filterBySubcategory && <DataTableFilterBySubcategory />}

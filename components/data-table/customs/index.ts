@@ -4,6 +4,7 @@ export { default as SearchData } from "./search-data";
 export { default as DataTableAddData } from "./add-data";
 export { default as RowActionsAll } from "./row-actions-all";
 export { default as DataTablePagination } from "./pagination";
+export { default as DataTableFilterByPrice } from "./filter-by-price";
 export { default as DataTableFilterByCategory } from "./filter-by-category";
 export { default as DataTableSelectedRowsCount } from "./selected-row-count";
 export { default as DataTableFilterBySubcategory } from "./filter-by-subcategory";

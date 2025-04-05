@@ -16,6 +16,8 @@ const useProductsFeatures = () => {
 	const currentSearch = searchParams.get("search") || "";
 	const currentStartDate = searchParams.get("startDate") || undefined;
 	const currentEndDate = searchParams.get("endDate") || undefined;
+	const currentMinPrice = Number(searchParams.get("minPrice")) || 0;
+	const currentMaxPrice = Number(searchParams.get("maxPrice")) || 10000;
 
 	const [debouncedSearch, setDebouncedSearch] = useState(currentSearch);
 
@@ -40,6 +42,8 @@ const useProductsFeatures = () => {
 			search?: string;
 			startDate?: string;
 			endDate?: string;
+			minPrice?: number;
+			maxPrice?: number;
 		} = {
 			page: currentPage,
 			limit: currentLimit,
@@ -50,6 +54,8 @@ const useProductsFeatures = () => {
 		if (currentEndDate) params.endDate = currentEndDate;
 		if (currentCategory) params.category = currentCategory;
 		if (currentSubCategory) params.subcategory = currentSubCategory;
+		if (currentMinPrice) params.minPrice = currentMinPrice;
+		if (currentMaxPrice) params.maxPrice = currentMaxPrice;
 
 		return params;
 	}, [
@@ -60,6 +66,8 @@ const useProductsFeatures = () => {
 		debouncedSearch,
 		currentStartDate,
 		currentEndDate,
+		currentMinPrice,
+		currentMaxPrice,
 	]);
 
 	const { data, isLoading } = useProducts(queryParams);
