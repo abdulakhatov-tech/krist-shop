@@ -4,5 +4,4 @@ export { default as SearchData } from "./search-data";
 export { default as DataTableAddData } from "./add-data";
 export { default as RowActionsAll } from "./row-actions-all";
 export { default as DataTablePagination } from "./pagination";
-export { default as RangeDatePicker } from "./range-date-picker";
 export { default as DataTableSelectedRowsCount } from "./selected-row-count";
