@@ -1,3 +1,5 @@
+import type { UserType } from "@/types/user.type";
+
 export interface IProduct {
 	id: string;
 	name: string;
@@ -10,16 +12,29 @@ export interface IProduct {
 	reviewCount: number;
 	imageUrl: string;
 	imageUrls: string[];
-	// category?: ICategoryItem;
-	// subcategory?: ISubCategoryItem;
+	category?: {
+		id: string;
+		name: string;
+		slug: string;
+	};
+	subcategory?: {
+		id: string;
+		name: string;
+		slug: string;
+	};
 	isBestSeller: boolean;
 	isFeatured: boolean;
 	// flashSaleItems: any[];
 	// bestSellingItems: any[];
-	// createdBy?: IUser;
+	createdBy?: {
+		id: string;
+		firstName: string;
+		lastName: string;
+		role: UserType;
+	} | null;
 	// colors: IColor[];
 	// sizes: ISize[];
 	// stock: IStock[];
-	createdAt: Date;
-	updatedAt: Date;
+	createdAt: string;
+	updatedAt: string;
 }

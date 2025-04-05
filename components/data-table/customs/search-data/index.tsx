@@ -70,7 +70,7 @@ const SearchData = ({ loading = false }: { loading?: boolean }) => {
 			className="min-w-[350px] max-w-[350px] h-9"
 			onChange={handleInputChange}
 			placeholder="Search..."
-			style={loading ? { cursor: "not-allowed" } : {}}
+			style={loading ? { cursor: "not-allowed" } : { height: "36px" }}
 		/>
 	);
 };

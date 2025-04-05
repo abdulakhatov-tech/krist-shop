@@ -7,15 +7,24 @@ interface PropsI<T> {
 		original: T;
 	};
 	dataKey: keyof T;
+	symbol?: "$";
 }
 
 const DataTableRowCopyableData = <T extends IUser | IProduct>({
 	row,
 	dataKey,
+	symbol,
 }: PropsI<T>) => {
 	const value = row.original[dataKey];
 
-	return value ? <Copier>{String(value)}</Copier> : <span>-</span>;
+	return value ? (
+		<>
+			{symbol ? symbol : ""}
+			<Copier>{String(value)}</Copier>
+		</>
+	) : (
+		<span>-</span>
+	);
 };
 
 export default DataTableRowCopyableData;

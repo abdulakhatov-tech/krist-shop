@@ -11,6 +11,12 @@ export interface IUser {
 	profilePhoto: string | null;
 	region: string | null;
 	district: string | null;
+	createdBy?: {
+		id: string;
+		firstName: string;
+		lastName: string;
+		role: UserType;
+	} | null;
 	extraAddress: string | null;
 	refreshToken: string | null;
 	createdAt: string;

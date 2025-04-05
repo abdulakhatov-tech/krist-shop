@@ -29,6 +29,12 @@ const UserInfo = ({ userId }: { userId: string }) => {
 
 			<div className="grid grid-cols-1 gap-4">
 				<DialogDescription className="flex items-center gap-1">
+					<strong>Role:</strong>{" "}
+					<span className="hover:text-blue-500">
+						<Copier>{user?.role.toUpperCase()}</Copier>
+					</span>
+				</DialogDescription>
+				<DialogDescription className="flex items-center gap-1">
 					<strong>Email:</strong>{" "}
 					<span className="hover:text-blue-500">
 						<Copier>{user?.email}</Copier>
@@ -72,7 +78,7 @@ const UserInfo = ({ userId }: { userId: string }) => {
 							<Copier>{user?.extraAddress}</Copier>
 						</span>
 					) : (
-						"No Extra Address"
+						"-"
 					)}
 				</DialogDescription>
 			</div>
