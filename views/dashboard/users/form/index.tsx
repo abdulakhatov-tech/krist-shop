@@ -7,9 +7,9 @@ import { Form } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/tools";
 import { userRolesOptions } from "@/utils/mock-data/user-roles";
-import useUserActionFormFeatures from "./features";
+import useUserActionFormModalFeatures from "./features";
 
-const UserActionForm = () => {
+const UserActionFormModal = () => {
 	const {
 		form,
 		isOpen,
@@ -18,7 +18,7 @@ const UserActionForm = () => {
 		handleFormSubmit,
 		isUserDataLoading,
 		handleOpenChange,
-	} = useUserActionFormFeatures();
+	} = useUserActionFormModalFeatures();
 	const { isSubmitting, isDirty } = form.formState;
 
 	return (
@@ -114,4 +114,4 @@ const UserActionForm = () => {
 	);
 };
 
-export default UserActionForm;
+export default UserActionFormModal;
