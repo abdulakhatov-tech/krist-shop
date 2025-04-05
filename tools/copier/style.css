@@ -1,0 +1,7 @@
+.copier-icon {
+	display: none;
+}
+
+.copier-wrapper:hover .copier-icon {
+	display: block;
+}

@@ -1,7 +1,7 @@
-import React from "react";
+import UsersPageView from "@/views/dashboard/users";
 
 const Users = () => {
-	return <div>Users</div>;
+	return <UsersPageView />;
 };
 
 export default Users;
