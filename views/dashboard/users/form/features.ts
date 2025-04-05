@@ -95,6 +95,7 @@ const useUserActionFormFeatures = () => {
 			newParams.delete("userId");
 			newParams.delete("action");
 			newParams.delete("action-type");
+			newParams.set("role", payload.role);
 			router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
 			reset();
 		} catch (error) {
