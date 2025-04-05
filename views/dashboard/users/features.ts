@@ -1,7 +1,8 @@
 "use client";
 
+import debounce from "lodash/debounce";
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useUsers } from "@/hooks/useQueryActions/useUsers";
 import type { UserType } from "@/types/user.type";
@@ -9,24 +10,26 @@ import type { UserType } from "@/types/user.type";
 const useUsersFeatures = () => {
 	const searchParams = useSearchParams();
 
-	// Memoized pagination values to prevent unnecessary recalculations
-	const {
-		currentPage,
-		currentLimit,
-		currentRole,
-		currentSearch,
-		currentStartDate,
-		currentEndDate,
-	} = useMemo(() => {
-		return {
-			currentPage: Number(searchParams.get("page")) || 1,
-			currentLimit: Number(searchParams.get("limit")) || 14,
-			currentRole: searchParams?.get("role") || "admin",
-			currentSearch: searchParams?.get("search") || undefined,
-			currentStartDate: searchParams?.get("startDate") || undefined,
-			currentEndDate: searchParams?.get("endDate") || undefined,
-		};
-	}, [searchParams]);
+	const currentPage = Number(searchParams.get("page")) || 1;
+	const currentLimit = Number(searchParams.get("limit")) || 14;
+	const currentRole = (searchParams.get("role") || "admin") as UserType;
+	const currentSearch = searchParams.get("search") || "";
+	const currentStartDate = searchParams.get("startDate") || undefined;
+	const currentEndDate = searchParams.get("endDate") || undefined;
+
+	const [debouncedSearch, setDebouncedSearch] = useState(currentSearch);
+
+	// Setup the debounced function once using useRef
+	const debounceRef = useRef(
+		debounce((value: string) => {
+			setDebouncedSearch(value);
+		}, 500),
+	);
+
+	// Update debouncedSearch whenever currentSearch changes
+	useEffect(() => {
+		debounceRef.current(currentSearch);
+	}, [currentSearch]);
 
 	const queryParams = useMemo(() => {
 		const params: {
@@ -39,10 +42,10 @@ const useUsersFeatures = () => {
 		} = {
 			page: currentPage,
 			limit: currentLimit,
-			role: currentRole as UserType,
+			role: currentRole,
 		};
 
-		if (currentSearch) params.search = currentSearch;
+		if (debouncedSearch) params.search = debouncedSearch;
 		if (currentStartDate) params.startDate = currentStartDate;
 		if (currentEndDate) params.endDate = currentEndDate;
 
@@ -51,14 +54,13 @@ const useUsersFeatures = () => {
 		currentPage,
 		currentLimit,
 		currentRole,
-		currentSearch,
+		debouncedSearch,
 		currentStartDate,
 		currentEndDate,
 	]);
 
 	const { data, isLoading } = useUsers(queryParams);
 
-	// Ensure correct formatting of the data
 	const formattedData = useMemo(
 		() => ({
 			data: data?.data ?? [],
@@ -74,11 +76,17 @@ const useUsersFeatures = () => {
 		[data],
 	);
 
-	// Proper role title formatting
 	const role = searchParams.get("role");
 	const title = role
 		? `${role.charAt(0).toUpperCase()}${role.slice(1)}s`
 		: "Users";
+
+	// Cleanup debounce on unmount
+	useEffect(() => {
+		return () => {
+			debounceRef.current.cancel();
+		};
+	}, []);
 
 	return {
 		formattedData,
