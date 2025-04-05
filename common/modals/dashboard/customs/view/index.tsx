@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-import { UserInfo } from "./customs";
+import { ProductInfo, UserInfo } from "./customs";
 import UserInfoLoading from "./customs/user-info/loading";
 
 const ViewModal = () => {
@@ -13,15 +13,18 @@ const ViewModal = () => {
 	const pathname = usePathname();
 
 	const userId = searchParams.get("userId");
+	const productId = searchParams.get("productId");
 	const action = searchParams.get("action");
 
 	const isUser = userId && action === "view";
-	const open = !!isUser;
+	const isProduct = productId && action === "view";
+	const open = !!isUser || !!isProduct;
 
 	const handleOpenChange = (state: boolean) => {
 		if (!state) {
 			const newParams = new URLSearchParams(searchParams.toString());
 			newParams.delete("userId");
+			newParams.delete("productId");
 			newParams.delete("action");
 			router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
 		}
@@ -30,11 +33,8 @@ const ViewModal = () => {
 	return (
 		<Dialog open={open} onOpenChange={handleOpenChange}>
 			<DialogContent className="!pt-10">
-				{isUser && (
-					<Suspense fallback={<UserInfoLoading />}>
-						<UserInfo userId={userId} />
-					</Suspense>
-				)}
+				{isUser && <UserInfo userId={userId} />}
+				{isProduct && <ProductInfo productId={productId} />}
 			</DialogContent>
 		</Dialog>
 	);
