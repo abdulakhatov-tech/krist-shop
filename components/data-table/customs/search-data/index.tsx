@@ -50,6 +50,14 @@ const SearchData = ({ loading = false }: { loading?: boolean }) => {
 		}
 	}, [searchValue]);
 
+	useEffect(() => {
+		if (inputRef.current) {
+			setTimeout(() => {
+				inputRef.current?.focus();
+			}, 10);
+		}
+	}, []);
+
 	// if (loading) {
 	//   return <Skeleton className="w-[350px] h-9" />;
 	// }
