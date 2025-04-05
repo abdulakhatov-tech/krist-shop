@@ -1,7 +1,7 @@
-import UsersTableWrapper from "@/views/dashboard/users/wrapper";
+import UsersPageView from "@/views/dashboard/users";
 
 const Users = () => {
-	return <UsersTableWrapper />;
+	return <UsersPageView />;
 };
 
 export default Users;

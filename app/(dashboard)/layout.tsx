@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import type React from "react";
 import type { ReactNode } from "react";
 
+import { DashboardModals } from "@/common/modals";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardNavbar, DashboardSidebar, ProtectedLayout } from "@/layouts";
+import { SuspenseLoading } from "@/tools";
 
 export const metadata: Metadata = {
 	title: {
@@ -35,10 +37,13 @@ const DashboardLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 						className="p-4 md:p-5"
 						style={{ minHeight: "calc(100vh - 56px)" }}
 					>
-						{children}
+						<SuspenseLoading mode="dashboard">{children}</SuspenseLoading>
 					</main>
 				</div>
 			</SidebarProvider>
+			<SuspenseLoading mode="website">
+				<DashboardModals />
+			</SuspenseLoading>
 		</ProtectedLayout>
 	);
 };
