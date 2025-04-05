@@ -16,10 +16,12 @@ const useProductsFeatures = () => {
 	const currentSearch = searchParams.get("search") || "";
 	const currentStartDate = searchParams.get("startDate") || undefined;
 	const currentEndDate = searchParams.get("endDate") || undefined;
-	const currentMinPrice = Number(searchParams.get("minPrice")) || 0;
-	const currentMaxPrice = Number(searchParams.get("maxPrice")) || 10000;
+	const currentMinPrice = searchParams.get("minPrice") || "0";
+	const currentMaxPrice = searchParams.get("maxPrice") || "10000";
 
 	const [debouncedSearch, setDebouncedSearch] = useState(currentSearch);
+	const [debounceMinPrice, setDebouncedMinPrice] = useState(currentMinPrice);
+	const [debounceMaxPrice, setDebouncedMaxPrice] = useState(currentMaxPrice);
 
 	// Setup the debounced function once using useRef
 	const debounceRef = useRef(
@@ -28,10 +30,30 @@ const useProductsFeatures = () => {
 		}, 500),
 	);
 
+	const debounceMinPriceRef = useRef(
+		debounce((value: string) => {
+			setDebouncedMinPrice(value);
+		}, 500),
+	);
+
+	const debounceMaxPriceRef = useRef(
+		debounce((value: string) => {
+			setDebouncedMaxPrice(value);
+		}, 500),
+	);
+
 	// Update debouncedSearch whenever currentSearch changes
 	useEffect(() => {
 		debounceRef.current(currentSearch);
 	}, [currentSearch]);
+
+	useEffect(() => {
+		debounceMinPriceRef.current(currentMinPrice);
+	}, [currentMinPrice]);
+
+	useEffect(() => {
+		debounceMaxPriceRef.current(currentMaxPrice);
+	}, [currentMaxPrice]);
 
 	const queryParams = useMemo(() => {
 		const params: {
@@ -54,8 +76,8 @@ const useProductsFeatures = () => {
 		if (currentEndDate) params.endDate = currentEndDate;
 		if (currentCategory) params.category = currentCategory;
 		if (currentSubCategory) params.subcategory = currentSubCategory;
-		if (currentMinPrice) params.minPrice = currentMinPrice;
-		if (currentMaxPrice) params.maxPrice = currentMaxPrice;
+		if (debounceMinPrice) params.minPrice = Number(debounceMinPrice);
+		if (debounceMaxPrice) params.maxPrice = Number(debounceMaxPrice);
 
 		return params;
 	}, [
@@ -66,8 +88,8 @@ const useProductsFeatures = () => {
 		debouncedSearch,
 		currentStartDate,
 		currentEndDate,
-		currentMinPrice,
-		currentMaxPrice,
+		debounceMaxPrice,
+		debounceMinPrice,
 	]);
 
 	const { data, isLoading } = useProducts(queryParams);
@@ -91,6 +113,8 @@ const useProductsFeatures = () => {
 	useEffect(() => {
 		return () => {
 			debounceRef.current.cancel();
+			debounceMinPriceRef.current.cancel();
+			debounceMaxPriceRef.current.cancel();
 		};
 	}, []);
 
