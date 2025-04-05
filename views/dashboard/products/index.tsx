@@ -17,6 +17,7 @@ const ProductsPageView = () => {
 				actions={{
 					searchable: true,
 					addable: true,
+					filterByCategory: true,
 				}}
 			/>
 		</>
