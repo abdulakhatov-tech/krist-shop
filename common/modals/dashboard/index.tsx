@@ -1,9 +1,8 @@
-import { AddModal, DeleteModal, ViewModal } from "./customs";
+import { DeleteModal, ViewModal } from "./customs";
 
 const DashboardModals = () => {
 	return (
 		<>
-			<AddModal />
 			<ViewModal />
 			<DeleteModal />
 		</>
