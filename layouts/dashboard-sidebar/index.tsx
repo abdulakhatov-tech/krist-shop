@@ -13,7 +13,7 @@ import { DashboardSidebarPathnameClient } from "./client";
 const DashboardSidebar = async () => {
 	return (
 		<Sidebar>
-			<SidebarContent className="bg-[#001529]">
+			<SidebarContent className="bg-[#001529] w-[255px]">
 				<SidebarGroup>
 					<SidebarGroupLabel className="px-6 h-12 text-white font-sans font-semibold text-2xl">
 						Admin Panel
