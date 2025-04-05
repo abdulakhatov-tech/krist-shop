@@ -17,6 +17,7 @@ import {
 import {
 	DataTableAddData,
 	DataTableFilterByCategory,
+	DataTableFilterBySubcategory,
 	DataTableLimit,
 	DataTablePagination,
 	DataTableSelectedRowsCount,
@@ -43,6 +44,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 		datePicker: false,
 		addable: false,
 		filterByCategory: false,
+		filterBySubcategory: false,
 	},
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable<TData>({
@@ -60,7 +62,8 @@ export function DataTable<TData extends { id: string }, TValue>({
 		totalPages: 23,
 	};
 
-	const { role, searchable, addable, filterByCategory } = actions;
+	const { role, searchable, addable, filterByCategory, filterBySubcategory } =
+		actions;
 
 	return (
 		<section id="user-table" className="w-full">
@@ -71,6 +74,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 					{searchable && <SearchData loading={loading} />}
 					{role && <UserRoles loading={loading} />}
 					{filterByCategory && <DataTableFilterByCategory />}
+					{filterBySubcategory && <DataTableFilterBySubcategory />}
 					{addable && <DataTableAddData loading={loading} />}
 				</div>
 			</div>

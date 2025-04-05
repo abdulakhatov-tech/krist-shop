@@ -10,6 +10,8 @@ export interface FetchProductsParams {
 	limit?: number;
 	minPrice?: number;
 	maxPrice?: number;
+	category?: string;
+	subcategory?: string;
 }
 
 interface PaginatedResponse<T> {

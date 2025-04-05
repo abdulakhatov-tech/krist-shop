@@ -18,6 +18,7 @@ const ProductsPageView = () => {
 					searchable: true,
 					addable: true,
 					filterByCategory: true,
+					filterBySubcategory: true,
 				}}
 			/>
 		</>

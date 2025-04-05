@@ -23,6 +23,7 @@ const FilterByCategory = () => {
 	const { data, isLoading } = useCategories();
 
 	const categoryParam = searchParams.get("category") as string;
+	const subcategoryParam = searchParams.get("subcategory") as string;
 
 	// Sync with URL param on mount
 	useEffect(() => {
@@ -31,11 +32,16 @@ const FilterByCategory = () => {
 
 			setSelectedCategory("all");
 			params.delete("category");
+
+			if (subcategoryParam !== "all") {
+				params.delete("subcategory");
+			}
+
 			router.replace(`${pathname}?${params.toString()}`);
 		} else {
 			setSelectedCategory(categoryParam);
 		}
-	}, [categoryParam, router, searchParams, pathname]);
+	}, [categoryParam, router, searchParams, pathname, subcategoryParam]);
 
 	const handleValueChange = (category: string) => {
 		const params = new URLSearchParams(searchParams.toString());
@@ -44,6 +50,9 @@ const FilterByCategory = () => {
 			params.delete("category");
 		} else {
 			params.set("category", category);
+			if (subcategoryParam !== "all") {
+				params.delete("subcategory");
+			}
 		}
 
 		router.replace(`${pathname}?${params.toString()}`);

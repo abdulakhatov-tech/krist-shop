@@ -14,5 +14,6 @@ export interface DataTableProps<TData, TValue> {
 		datePicker?: boolean;
 		addable?: boolean;
 		filterByCategory?: boolean;
+		filterBySubcategory?: boolean;
 	};
 }

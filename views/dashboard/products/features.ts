@@ -12,6 +12,7 @@ const useProductsFeatures = () => {
 	const currentPage = Number(searchParams.get("page")) || 1;
 	const currentLimit = Number(searchParams.get("limit")) || 14;
 	const currentCategory = searchParams.get("category") || "";
+	const currentSubCategory = searchParams.get("subcategory") || "";
 	const currentSearch = searchParams.get("search") || "";
 	const currentStartDate = searchParams.get("startDate") || undefined;
 	const currentEndDate = searchParams.get("endDate") || undefined;
@@ -35,6 +36,7 @@ const useProductsFeatures = () => {
 			page: number;
 			limit: number;
 			category?: string;
+			subcategory?: string;
 			search?: string;
 			startDate?: string;
 			endDate?: string;
@@ -47,12 +49,14 @@ const useProductsFeatures = () => {
 		if (currentStartDate) params.startDate = currentStartDate;
 		if (currentEndDate) params.endDate = currentEndDate;
 		if (currentCategory) params.category = currentCategory;
+		if (currentSubCategory) params.subcategory = currentSubCategory;
 
 		return params;
 	}, [
 		currentPage,
 		currentLimit,
 		currentCategory,
+		currentSubCategory,
 		debouncedSearch,
 		currentStartDate,
 		currentEndDate,
