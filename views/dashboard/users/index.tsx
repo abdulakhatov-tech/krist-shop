@@ -13,7 +13,12 @@ const UsersPageView = () => {
 			columns={columns}
 			data={formattedData}
 			loading={isLoading}
-			actions={{ role: true, searchable: true, datePicker: true }}
+			actions={{
+				role: true,
+				searchable: true,
+				datePicker: true,
+				addable: true,
+			}}
 		/>
 	);
 };

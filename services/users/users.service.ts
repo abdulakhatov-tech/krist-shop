@@ -1,8 +1,10 @@
 import { type AxiosInstance, isAxiosError } from "axios";
 
 import type { IUser } from "@/interfaces/user.interface";
+import type { addUserFormSchema, editUserFormSchema } from "@/schemas/user";
 import type { ResponseType } from "@/types/api";
 import type { UserType } from "@/types/user.type";
+import type { z } from "zod";
 import { useAxios } from "../api/axios.service";
 
 export interface FetchUsersParams {
@@ -59,6 +61,35 @@ const createUsersService = ($axios: AxiosInstance) => ({
 				throw new Error(error?.response?.data?.message);
 			}
 			throw new Error("Failed to edit user role.");
+		}
+	},
+
+	async addUser(
+		body: z.infer<typeof addUserFormSchema> & { createdBy?: string },
+	): Promise<IUser> {
+		try {
+			const { data } = await $axios.post("/users", body);
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to add user.");
+		}
+	},
+
+	async editUser(
+		userId: string,
+		body: z.infer<typeof editUserFormSchema>,
+	): Promise<IUser> {
+		try {
+			const { data } = await $axios.patch(`/users/${userId}`, body);
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to edit user.");
 		}
 	},
 });

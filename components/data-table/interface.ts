@@ -12,5 +12,6 @@ export interface DataTableProps<TData, TValue> {
 		role?: boolean;
 		searchable?: boolean;
 		datePicker?: boolean;
+		addable?: boolean;
 	};
 }

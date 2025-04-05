@@ -2,11 +2,16 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 import type { IUser } from "@/interfaces/user.interface";
+import type { addUserFormSchema, editUserFormSchema } from "@/schemas/user";
 import {
 	type FetchUsersParams,
 	useUsersService,
 } from "@/services/users/users.service";
 import { handleApiError } from "@/utils/helper-fns/errors";
+import type { z } from "zod";
+
+type AddUserFormData = z.infer<typeof addUserFormSchema>;
+type EditUserFormData = z.infer<typeof editUserFormSchema>;
 
 export const useUsers = (params: FetchUsersParams = {}) => {
 	const { fetchUsers } = useUsersService();
@@ -63,6 +68,36 @@ export const useEditUserRole = (userId: string) => {
 				queryKey: ["users"],
 			});
 			queryClient.invalidateQueries({ queryKey: ["users", user?.id] });
+		},
+		onError: handleApiError,
+	});
+};
+
+export const useAddUser = () => {
+	const queryClient = useQueryClient();
+	const { addUser } = useUsersService();
+
+	return useMutation({
+		mutationFn: (data: AddUserFormData & { createdBy?: string }) =>
+			addUser(data),
+		onSuccess: () => {
+			toast.success("User added successfully!");
+			queryClient.invalidateQueries({ queryKey: ["users"] });
+		},
+		onError: handleApiError,
+	});
+};
+
+export const useEditUser = (userId: string) => {
+	const queryClient = useQueryClient();
+	const { editUser } = useUsersService();
+
+	return useMutation({
+		mutationFn: (data: EditUserFormData) => editUser(userId, data),
+		onSuccess: () => {
+			toast.success("User edited successfully!");
+			queryClient.invalidateQueries({ queryKey: ["users"] });
+			queryClient.invalidateQueries({ queryKey: ["users", userId] });
 		},
 		onError: handleApiError,
 	});

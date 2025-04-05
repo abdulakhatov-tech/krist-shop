@@ -15,6 +15,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import {
+	DataTableAddData,
 	DataTableLimit,
 	DataTablePagination,
 	DataTableSelectedRowsCount,
@@ -39,6 +40,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 		role: false,
 		searchable: false,
 		datePicker: false,
+		addable: false,
 	},
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable<TData>({
@@ -56,7 +58,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 		totalPages: 23,
 	};
 
-	const { role, searchable } = actions;
+	const { role, searchable, addable } = actions;
 
 	return (
 		<section id="user-table" className="w-full">
@@ -66,6 +68,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 				<div className="flex items-center gap-2">
 					{searchable && <SearchData loading={loading} />}
 					{role && <UserRoles loading={loading} />}
+					{addable && <DataTableAddData loading={loading} />}
 				</div>
 			</div>
 

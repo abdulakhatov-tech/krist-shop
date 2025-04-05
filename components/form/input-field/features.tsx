@@ -30,7 +30,7 @@ const useInputFieldFeatures = ({
 		field: { onChange: (value: string) => void },
 	) => {
 		// Check if the name is 'identifier' and handle accordingly
-		if (name === "identifier") {
+		if (name === "identifier" || name === "phoneNumber" || name === "email") {
 			handleIdentifier(e, field);
 		} else {
 			const value = e.target.value;
