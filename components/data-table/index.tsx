@@ -19,6 +19,7 @@ import {
 	DataTableLimit,
 	DataTablePagination,
 	DataTableSelectedRowsCount,
+	RangeDatePicker,
 	RowActionsAll,
 	SearchData,
 	UserRoles,
@@ -58,7 +59,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 		totalPages: 23,
 	};
 
-	const { role, searchable, addable } = actions;
+	const { role, searchable, addable, datePicker } = actions;
 
 	return (
 		<section id="user-table" className="w-full">
@@ -67,6 +68,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 
 				<div className="flex items-center gap-2">
 					{searchable && <SearchData loading={loading} />}
+					{datePicker && <RangeDatePicker />}
 					{role && <UserRoles loading={loading} />}
 					{addable && <DataTableAddData loading={loading} />}
 				</div>
