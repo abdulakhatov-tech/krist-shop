@@ -19,7 +19,9 @@ const ProductInfo = ({ productId }: { productId: string }) => {
 		<>
 			<div
 				className={`mx-auto rounded-full overflow-hidden border ${
-					product?.imageUrl ? "" : "p-8"
+					product?.imageUrl
+						? "max-w-[140px] max-h-[140px]"
+						: "p-8 max-w-[100px] max-h-[100px]"
 				}`}
 			>
 				<Image
@@ -27,6 +29,8 @@ const ProductInfo = ({ productId }: { productId: string }) => {
 					alt={product?.name as string}
 					width={product?.imageUrl ? 140 : 100}
 					height={product?.imageUrl ? 140 : 100}
+					priority
+					className="object-cover"
 				/>
 			</div>
 
@@ -79,15 +83,13 @@ const ProductInfo = ({ productId }: { productId: string }) => {
 				<DialogDescription className="flex flex-col gap-1">
 					<strong>Short Description:</strong>{" "}
 					<span className="hover:text-blue-500">
-						<Copier>{product?.short_description}</Copier>
+						{product?.short_description}
 					</span>
 				</DialogDescription>
 
 				<DialogDescription className="flex flex-col gap-1">
 					<strong>Long Description:</strong>{" "}
-					<span className="hover:text-blue-500">
-						<Copier>{product?.description}</Copier>
-					</span>
+					<span className="hover:text-blue-500">{product?.description}</span>
 				</DialogDescription>
 			</div>
 		</>

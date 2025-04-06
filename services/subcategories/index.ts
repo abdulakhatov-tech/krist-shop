@@ -15,7 +15,23 @@ const createSubcategoriesService = ($axios: AxiosInstance) => ({
 		}
 	},
 
-	async fetchSubCategoriesByCategory(
+	async fetchSubCategoriesByCategorySlug(
+		categorySlug: string,
+	): Promise<ISubcategory[]> {
+		try {
+			const { data } = await $axios.get(
+				`/categories/slug/${categorySlug}/subcategories`,
+			);
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to fetch subcategories by category slug.");
+		}
+	},
+
+	async fetchSubCategoriesByCategoryId(
 		categoryId: string,
 	): Promise<ISubcategory[]> {
 		try {
@@ -27,7 +43,7 @@ const createSubcategoriesService = ($axios: AxiosInstance) => ({
 			if (isAxiosError(error)) {
 				throw new Error(error?.response?.data?.message);
 			}
-			throw new Error("Failed to fetch subcategories by category.");
+			throw new Error("Failed to fetch subcategories by category id.");
 		}
 	},
 });

@@ -6,6 +6,6 @@ export interface FormInputFieldPropsI<T extends FieldValues> {
 	label: string;
 	loading?: boolean;
 	placeholder?: string;
-	type?: "text" | "password" | "number";
+	type?: "text" | "password" | "number" | "color";
 	onChange?: (value: React.ChangeEvent<HTMLInputElement>) => void;
 }

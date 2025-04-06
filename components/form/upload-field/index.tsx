@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import noImage from "@/public/no-image.svg";
+import noImage from "@/public/no-image2.png";
 import noUser from "@/public/no-user.svg";
 import { LoadingSpinner } from "@/tools";
 import useFormUploadFieldFeatures from "./feautes";
@@ -39,32 +39,40 @@ const FormUploadField = <T extends FieldValues>({
 						<FormLabel>{label}</FormLabel>
 						<FormControl>
 							{loading ? (
-								<Loading />
+								<Loading name={name} />
 							) : (
 								<div className="flex items-center">
 									<div className="relative">
 										<Image
-											src={
-												preview ||
-												(typeof noImage === "string" ? noUser : noUser)
-											}
+											src={preview || (name === "imageUrl" ? noImage : noUser)}
+											width={120}
+											height={120}
 											className={cn(
-												"object-cover rounded-full w-[100px] h-[100px] md:w-[120px] md:h-[120px] border border-solid",
+												name === "profilePhoto" && "rounded-full ",
+												name === "imageUrl" && "p-3 rounded-lg",
+												"object-cover w-[100px] h-[100px] md:w-[120px] md:h-[120px] border border-solid",
 											)}
 											alt="Uploaded Preview"
 										/>
 										<div
 											onClick={() => inputRef.current?.click()}
 											onKeyUp={() => inputRef.current?.click()}
-											className="flex items-center justify-center absolute -right-0 bottom-1 w-7 h-7 rounded-full bg-[#F6F6F6] shadow-2xl custom-shadow cursor-pointer p-1"
+											className={cn(
+												name === "profilePhoto" ? "-right-0" : "-right-3",
+												"bg-[#F6F6F6] flex items-center justify-center absolute bottom-2 border w-7 h-7 rounded-full shadow-2xl custom-shadow cursor-pointer p-1",
+											)}
 										>
 											{uploading ? (
 												<LoadingSpinner
-													className="text-[20px] text-black"
+													className={cn(
+														name === "imageUrl" && "border-gray-300",
+														name === "profilePhoto" && "text-black",
+														"text-[20px]",
+													)}
 													size="sm"
 												/>
 											) : (
-												<Camera className="text-[22px] text-[#6C6C6C]" />
+												<Camera className={cn("text-[22px] text-[#6C6C6C]")} />
 											)}
 										</div>
 										<Input

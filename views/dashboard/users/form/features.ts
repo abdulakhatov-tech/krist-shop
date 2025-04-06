@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
@@ -13,9 +14,6 @@ import {
 } from "@/hooks/useQueryActions/useUsers";
 import type { IUser } from "@/interfaces/user.interface";
 import { addUserFormSchema, editUserFormSchema } from "@/schemas/user";
-import { handleApiError } from "@/utils/helper-fns/errors";
-import { useEffect } from "react";
-import { toast } from "sonner";
 
 const useUserActionFormFeatures = () => {
 	// hooks
@@ -52,7 +50,7 @@ const useUserActionFormFeatures = () => {
 	const { reset, formState } = form;
 	const hasErrors = Object.keys(formState.errors).length > 0;
 
-	// Sync product data with form when fetched
+	// Sync user data with form when fetched
 	useEffect(() => {
 		if (userData && !isUserDataLoading) {
 			reset({
@@ -122,32 +120,6 @@ const useUserActionFormFeatures = () => {
 		handleFormSubmit,
 		isUserDataLoading,
 	};
-};
-
-// Utility function for default form values
-const getDefaultValues = (action: string, userData: IUser | null) => {
-	if (action === "add") {
-		return {
-			firstName: "",
-			lastName: "",
-			role: "customer",
-			email: "",
-			phoneNumber: "",
-			password: "",
-		};
-	}
-
-	if (userData) {
-		return {
-			firstName: userData.firstName || "",
-			lastName: userData.lastName || "",
-			role: userData.role || "customer",
-			email: userData.email || "",
-			phoneNumber: userData.phoneNumber || "",
-		};
-	}
-
-	return {};
 };
 
 export default useUserActionFormFeatures;

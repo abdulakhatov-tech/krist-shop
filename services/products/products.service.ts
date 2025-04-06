@@ -48,7 +48,9 @@ const createProductsService = ($axios: AxiosInstance) => ({
 		}
 	},
 
-	async addProduct(body: z.infer<typeof productFormSchema>): Promise<IProduct> {
+	async addProduct(
+		body: z.infer<typeof productFormSchema> & { createdBy?: string },
+	): Promise<IProduct> {
 		try {
 			const { data } = await $axios.post("/products", body);
 			return data.data;

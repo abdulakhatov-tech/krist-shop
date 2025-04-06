@@ -1,4 +1,5 @@
 import type { UserType } from "@/types/user.type";
+import type { ISize } from "./size.interface";
 
 export interface IProduct {
 	id: string;
@@ -32,9 +33,16 @@ export interface IProduct {
 		lastName: string;
 		role: UserType;
 	} | null;
-	// colors: IColor[];
-	// sizes: ISize[];
-	// stock: IStock[];
+	colors: {
+		id: string;
+		name: string;
+		hexCode: string;
+	}[];
+	sizes: Pick<ISize, "id" & "name">[];
+	stock: {
+		id: string;
+		quantity: number;
+	}[];
 	createdAt: string;
 	updatedAt: string;
 }

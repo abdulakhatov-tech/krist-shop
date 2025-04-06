@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-	useSubCategoriesByCategory,
+	useSubCategoriesByCategorySlug,
 	useSubcategories,
 } from "@/hooks/useQueryActions/useSubcategories";
 import type { ISubcategory } from "@/interfaces/subcategory.interface";
@@ -33,7 +33,7 @@ const FilterBySubcategory = () => {
 	});
 
 	const { data: categorySubcategories, isLoading: isLoadingByCategory } =
-		useSubCategoriesByCategory(categorySlug, { enabled: !!categorySlug });
+		useSubCategoriesByCategorySlug(categorySlug, { enabled: !!categorySlug });
 
 	const isLoading = categorySlug ? isLoadingByCategory : isLoadingAll;
 	const subcategories = categorySlug ? categorySubcategories : allSubcategories;

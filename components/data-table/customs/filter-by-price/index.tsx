@@ -74,11 +74,11 @@ const FilterByPrice = () => {
 	return (
 		<Popover open={open} onOpenChange={(e) => setOpen(!!e)}>
 			<PopoverTrigger asChild>
-				<Button variant="outline">
+				<Button variant="outline" className="text-normal">
 					{searchParams.get("minPrice") && searchParams.get("maxPrice") ? (
-						<strong className="text-green-600">
+						<span className="text-green-600">
 							{formatPrice(range[0])} - {formatPrice(range[1])}
-						</strong>
+						</span>
 					) : (
 						"Filter By Price"
 					)}

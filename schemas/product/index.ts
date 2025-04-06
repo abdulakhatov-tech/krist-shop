@@ -1,78 +1,60 @@
+import { current } from "@reduxjs/toolkit";
 import { z } from "zod";
 
 export const productFormSchema = z
 	.object({
-		name: z.string().min(2, {
-			message: "Name is required!.",
-		}),
+		name: z.string().min(2, { message: "Name is required!" }),
+		slug: z.string().min(2, { message: "Slug is required" }),
+		category: z.string().min(2, { message: "Category is required!" }),
+		subcategory: z.string().min(2, { message: "Subcategory is required!" }),
+		currentPrice: z.coerce
+			.number({
+				invalid_type_error: "Current price is required!",
+			})
+			.positive({ message: "Current price must be a positive number!" })
+			.max(999999, { message: "Current price must not exceed $999,999.00" }),
 
-		slug: z.string().min(2, {
-			message: "Slug is required.",
-		}),
-
-		imageUrl: z.string().url({ message: "Invalid image URL" }).optional(),
-
+		originalPrice: z.coerce
+			.number({
+				invalid_type_error: "Original price is required!",
+			})
+			.positive({ message: "Original price must be a positive number!" })
+			.max(999999, { message: "Original price must not exceed $999,999.00" }),
+		isBestSeller: z.boolean().optional(),
+		isFeatured: z.boolean().optional(),
 		short_description: z
 			.string()
 			.min(100, {
-				message: "Short Description must be at least 10 characters long.",
+				message: "Short Description must be at least 100 characters long!",
 			})
 			.max(200, {
-				message: "Short Description must be at most 200 characters long.",
+				message: "Short Description must be at most 200 characters long!",
 			}),
 
 		description: z
 			.string()
 			.min(200, {
-				message: "Description must be at least 200 characters long.",
+				message: "Description must be at least 200 characters long!",
 			})
 			.max(1000, {
-				message: "Short Description must be at most 1000 characters long.",
+				message: "Short Description must be at most 1000 characters long!",
 			}),
 
-		currentPrice: z.preprocess(
-			(val) => {
-				if (typeof val === "string") return Number.parseFloat(val);
-				return val;
-			},
-			z
-				.number()
-				.positive({ message: "Current price must be a positive number." })
-				.refine((val: number) => val <= 999999, {
-					message: "Current price must not exceed 999,999.",
-				}),
-		),
-
-		originalPrice: z.preprocess(
-			(val) => {
-				if (typeof val === "string") return Number.parseFloat(val);
-				return val;
-			},
-			z
-				.number()
-				.positive({ message: "Original price must be a positive number." })
-				.refine((val: number) => val >= 0, {
-					message: "Original price must be a positive number.",
-				}),
-		),
-
-		category: z.string().min(2, { message: "Category is required." }),
-		subcategory: z.string().min(2, { message: "Subcategory is required." }),
-		isBestSeller: z.boolean().optional(),
-		isFeatured: z.boolean().optional(),
+		imageUrl: z
+			.string({
+				required_error: "Thumbnail is required!",
+			})
+			.url({ message: "Invalid image URL" }),
 		imageUrls: z
-			.array(z.string().url({ message: "Invalid image URL" }))
-			.min(4, { message: "4 image URL is required" })
-			.max(4, { message: "Cannot upload more than 4 images" }),
-		createdBy: z.string().nullable(),
+			.array(
+				z
+					.string()
+					.url({ message: "Please provide valid URLs for all images!" }),
+			)
+			.min(4, { message: "A minimum of 4 image URLs is required!" })
+			.max(4, { message: "You can upload no more than 4 images!" }),
 	})
-	.refine(
-		(data) => {
-			// Perform cross-field validation on the entire object
-			return data.originalPrice >= data.currentPrice;
-		},
-		{
-			message: "Original price must be greater than or equal to current price.",
-			path: ["originalPrice"], // You can specify which field to attach the error to
-		},
-	);
+	.refine((data) => data.originalPrice >= data.currentPrice, {
+		message: "Original price must be greater than or equal to current price!",
+		path: ["originalPrice"],
+	});
