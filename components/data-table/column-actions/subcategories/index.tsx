@@ -12,7 +12,6 @@ import type { ISubcategory } from "@/interfaces/subcategory.interface";
 import noImage from "@/public/no-image.svg";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 interface PropsI {
@@ -24,7 +23,6 @@ interface PropsI {
 }
 
 const DataTableSubcategories = ({ row }: PropsI) => {
-	const pathname = usePathname();
 	const [isOpen, setIsOpen] = useState(false);
 	const subcategories = row.original.subcategories;
 

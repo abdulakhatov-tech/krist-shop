@@ -9,7 +9,6 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { IProduct } from "@/interfaces/product.interface";
-import { ISubcategory } from "@/interfaces/subcategory.interface";
 import noImage from "@/public/no-image.svg";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
