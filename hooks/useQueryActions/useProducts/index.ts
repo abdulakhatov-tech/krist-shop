@@ -5,7 +5,6 @@ import type { z } from "zod";
 
 import type { IProduct } from "@/interfaces/product.interface";
 import type { productFormSchema } from "@/schemas/product";
-import { productStockFormSchema } from "@/schemas/product-stock";
 import {
 	type FetchProductsParams,
 	useProductsService,

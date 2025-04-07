@@ -1,22 +1,19 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
 
 import {
 	DataTableCreatedAt,
-	DataTableCreatedBy,
-	DataTablePrice,
+	DataTableProducts,
 	DataTableRowActions,
-	DataTableRowCopyableData,
 	DataTableRowInfo,
 	DataTableRowSelection,
 	DataTableRowSelectionHeader,
-	DataTableStock,
+	DataTableSubcategories,
 } from "@/components/data-table/column-actions";
-import type { IProduct } from "@/interfaces/product.interface";
+import type { ICategory } from "@/interfaces/category.interface";
 
-const columns: ColumnDef<IProduct>[] = [
+const columns: ColumnDef<ICategory>[] = [
 	{
 		id: "select",
 		header: ({ table }) => <DataTableRowSelectionHeader table={table} />,
@@ -34,34 +31,14 @@ const columns: ColumnDef<IProduct>[] = [
 		header: "Slug",
 	},
 	{
-		accessorKey: "category",
-		header: "Category",
-		cell: ({ row }) => row.original?.category?.name,
-	},
-	{
 		accessorKey: "subcategory",
 		header: "Subcategory",
-		cell: ({ row }) => row.original?.subcategory?.name,
+		cell: ({ row }) => <DataTableSubcategories row={row} />,
 	},
 	{
-		accessorKey: "currentPrice",
-		header: "Current Price",
-		cell: ({ row }) => <DataTablePrice dataKey="currentPrice" row={row} />,
-	},
-	{
-		accessorKey: "originalPrice",
-		header: "Original Price",
-		cell: ({ row }) => <DataTablePrice dataKey="originalPrice" row={row} />,
-	},
-	{
-		accessorKey: "stock",
-		header: "Stock",
-		cell: ({ row }) => <DataTableStock row={row} />,
-	},
-	{
-		accessorKey: "createdBy",
-		header: "Created By",
-		cell: ({ row }) => <DataTableCreatedBy row={row} />,
+		accessorKey: "products",
+		header: "Products",
+		cell: ({ row }) => <DataTableProducts row={row} />,
 	},
 	{
 		accessorKey: "createdAt",
@@ -74,10 +51,9 @@ const columns: ColumnDef<IProduct>[] = [
 		cell: ({ row }) => (
 			<DataTableRowActions
 				row={row}
-				typeId="productId"
+				typeId="categoryId"
 				actions={{
-					view: true,
-					stock: true,
+					view: false,
 					edit: true,
 					delete: true,
 				}}

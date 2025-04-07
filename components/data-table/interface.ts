@@ -8,7 +8,7 @@ export interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	loading: boolean;
 	title: string;
-	actions: {
+	actions?: {
 		role?: boolean;
 		searchable?: boolean;
 		datePicker?: boolean;

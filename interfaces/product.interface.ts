@@ -1,5 +1,4 @@
 import type { UserType } from "@/types/user.type";
-import type { ISize } from "./size.interface";
 
 export interface IProduct {
 	id: string;

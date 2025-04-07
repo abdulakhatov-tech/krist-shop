@@ -2,11 +2,11 @@ import Image from "next/image";
 
 import { DialogTitle } from "@/components/ui/dialog";
 import { useGetProduct } from "@/hooks/useQueryActions/useProducts";
-import noUser from "@/public/no-user.svg";
+import noUser from "@/public/no-image.svg";
 import Loading from "./loading";
 
 const UserInfo = ({ productId }: { productId: string }) => {
-	const { data: user, isLoading } = useGetProduct(productId);
+	const { data: product, isLoading } = useGetProduct(productId);
 
 	if (isLoading) {
 		return <Loading />;
@@ -14,16 +14,17 @@ const UserInfo = ({ productId }: { productId: string }) => {
 
 	return (
 		<>
-			<Image
-				src={user?.imageUrl || noUser}
-				alt={user?.name as string}
-				width={140}
-				height={140}
-				className="mx-auto"
-			/>
+			<div className="bg-accent rounded-full w-fit mx-auto p-8">
+				<Image
+					src={product?.imageUrl || noUser}
+					alt={product?.name as string}
+					width={product?.imageUrl ? 140 : 100}
+					height={product?.imageUrl ? 140 : 100}
+				/>
+			</div>
 
 			<DialogTitle className="text-xl font-bold text-center">
-				{user?.name}
+				{product?.name}
 			</DialogTitle>
 		</>
 	);

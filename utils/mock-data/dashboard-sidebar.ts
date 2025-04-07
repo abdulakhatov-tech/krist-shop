@@ -3,8 +3,6 @@ import {
 	ChartColumnStacked,
 	Gauge,
 	ListOrdered,
-	Palette,
-	PencilRuler,
 	Settings,
 	ShoppingCart,
 	Users,
@@ -46,16 +44,6 @@ export const dashboardSidebarItems: DashboardSidebarItemType[] = [
 		title: "Subcategories",
 		url: "/dashboard/subcategories",
 		icon: ChartColumnStacked,
-	},
-	{
-		title: "Sizes",
-		url: "/dashboard/sizes",
-		icon: PencilRuler,
-	},
-	{
-		title: "Colors",
-		url: "/dashboard/colors",
-		icon: Palette,
 	},
 	{
 		title: "Stocks",

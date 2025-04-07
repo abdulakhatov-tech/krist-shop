@@ -13,12 +13,19 @@ interface DataTableRowActionsProps {
 			id: string;
 		};
 	};
-	typeId: "productId" | "userId";
+	typeId: "productId" | "userId" | "categoryId";
+	actions?: {
+		view?: boolean;
+		edit?: boolean;
+		stock?: boolean;
+		delete?: boolean;
+	};
 }
 
 const DataTableRowAction: React.FC<DataTableRowActionsProps> = ({
 	row,
 	typeId,
+	actions = {}, // Default empty object if no actions are passed
 }) => {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -35,13 +42,14 @@ const DataTableRowAction: React.FC<DataTableRowActionsProps> = ({
 		return `${pathname}?${params.toString()}`;
 	};
 
-	const actions = ["view", "edit", "delete"];
-	if (typeId === "productId" || pathname === "/dashboard/products") {
-		actions.splice(1, 0, "stock"); // Insert "stock" after "view"
-	}
+	// Actions array based on the passed actions prop
+	const availableActions = Object.keys(actions).filter(
+		(action) => actions[action as keyof typeof actions],
+	);
 
+	// Function to generate the title for each action
 	const generateTitle = (action: string): string => {
-		const item = type?.[0].toUpperCase() + type?.slice(1);
+		const item = type?.[0]?.toUpperCase() + type?.slice(1);
 
 		switch (action) {
 			case "view":
@@ -59,7 +67,7 @@ const DataTableRowAction: React.FC<DataTableRowActionsProps> = ({
 
 	return (
 		<div className="flex items-center justify-end gap-2">
-			{actions.map((action) => (
+			{availableActions.map((action) => (
 				<Link key={action} href={generateUrl(action)}>
 					<Button
 						title={generateTitle(action)}

@@ -49,6 +49,16 @@ export const columns: ColumnDef<IUser>[] = [
 	{
 		accessorKey: "actions",
 		header: () => <div className="text-right">Actions</div>,
-		cell: ({ row }) => <DataTableRowActions row={row} typeId="userId" />,
+		cell: ({ row }) => (
+			<DataTableRowActions
+				row={row}
+				typeId="userId"
+				actions={{
+					view: true,
+					edit: true,
+					delete: true,
+				}}
+			/>
+		),
 	},
 ];

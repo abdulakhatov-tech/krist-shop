@@ -4,6 +4,6 @@ export interface ISubcategory {
 	id: string;
 	name: string;
 	slug: string;
-	image_url: string | null;
+	imageUrl: string | null;
 	category?: ICategory;
 }
