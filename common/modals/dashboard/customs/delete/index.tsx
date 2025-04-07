@@ -8,9 +8,15 @@ import {
 } from "@/components/ui/dialog";
 import { useDeleteCategory } from "@/hooks/useQueryActions/useCategories";
 import { useDeleteProduct } from "@/hooks/useQueryActions/useProducts";
+import { useDeleteSubcategory } from "@/hooks/useQueryActions/useSubcategories";
 import { useDeleteUser } from "@/hooks/useQueryActions/useUsers";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { CategoryInfo, ProductInfo, UserInfo } from "./customs";
+import {
+	CategoryInfo,
+	ProductInfo,
+	SubcategoryInfo,
+	UserInfo,
+} from "./customs";
 
 const DeleteModal = () => {
 	const router = useRouter();
@@ -21,14 +27,17 @@ const DeleteModal = () => {
 	const userId = searchParams.get("userId");
 	const productId = searchParams.get("productId");
 	const categoryId = searchParams.get("categoryId");
+	const subcategoryId = searchParams.get("subcategoryId");
 
 	const isUser = userId && action === "delete";
 	const isProduct = productId && action === "delete";
 	const isCategory = categoryId && action === "delete";
+	const isSubcategory = subcategoryId && action === "delete";
 
 	const { mutateAsync: deleteUser } = useDeleteUser();
 	const { mutateAsync: deleteProduct } = useDeleteProduct();
 	const { mutateAsync: deleteCategory } = useDeleteCategory();
+	const { mutateAsync: deleteSubcategory } = useDeleteSubcategory();
 
 	const handleOpenChange = (state: boolean) => {
 		if (!state) {
@@ -36,6 +45,7 @@ const DeleteModal = () => {
 			newParams.delete("userId");
 			newParams.delete("productId");
 			newParams.delete("categoryId");
+			newParams.delete("subcategoryId");
 			newParams.delete("action");
 			router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
 		}
@@ -45,11 +55,12 @@ const DeleteModal = () => {
 		if (isUser) await deleteUser(userId);
 		if (isProduct) await deleteProduct(productId);
 		if (isCategory) await deleteCategory(categoryId);
+		if (isSubcategory) await deleteSubcategory(subcategoryId);
 
 		handleOpenChange(false);
 	};
 
-	const open = !!isUser || !!isProduct || !!isCategory;
+	const open = !!isUser || !!isProduct || !!isCategory || !!isSubcategory;
 
 	return (
 		<Dialog open={open} onOpenChange={handleOpenChange}>
@@ -57,6 +68,7 @@ const DeleteModal = () => {
 				{isUser && <UserInfo userId={userId} />}
 				{isProduct && <ProductInfo productId={productId} />}
 				{isCategory && <CategoryInfo categoryId={categoryId} />}
+				{isSubcategory && <SubcategoryInfo subcategoryId={subcategoryId} />}
 
 				<DialogDescription className="text-center">
 					This action cannot be undone. This will permanently remove your data

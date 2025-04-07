@@ -76,7 +76,7 @@ export const useEditCategory = () => {
 			if (isAxiosError(error)) {
 				toast.error(error?.response?.data?.message);
 			} else {
-				toast.error(error?.message || "Failed to add category.");
+				toast.error(error?.message || "Failed to edit category.");
 			}
 		},
 	});

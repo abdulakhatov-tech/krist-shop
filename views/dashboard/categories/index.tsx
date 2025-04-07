@@ -12,7 +12,7 @@ const CategoriesPageView = () => {
 	return (
 		<>
 			<DataTable
-				title={"Products"}
+				title={"Categories"}
 				columns={columns}
 				data={formattedData}
 				loading={isLoading}

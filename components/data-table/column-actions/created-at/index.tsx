@@ -1,5 +1,6 @@
 import type { ICategory } from "@/interfaces/category.interface";
 import type { IProduct } from "@/interfaces/product.interface";
+import type { ISubcategory } from "@/interfaces/subcategory.interface";
 import { formatDate } from "@/utils/helper-fns/format-date";
 
 interface PropsI<T> {
@@ -8,7 +9,7 @@ interface PropsI<T> {
 	};
 }
 
-const DataTableCreatedAt = <T extends IProduct | ICategory>({
+const DataTableCreatedAt = <T extends IProduct | ICategory | ISubcategory>({
 	row,
 }: PropsI<T>) => {
 	const createdAt = row.original.createdAt;

@@ -13,7 +13,7 @@ interface DataTableRowActionsProps {
 			id: string;
 		};
 	};
-	typeId: "productId" | "userId" | "categoryId";
+	typeId: "productId" | "userId" | "categoryId" | "subcategoryId";
 	actions?: {
 		view?: boolean;
 		edit?: boolean;

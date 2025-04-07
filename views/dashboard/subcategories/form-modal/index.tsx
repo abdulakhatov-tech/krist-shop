@@ -2,15 +2,15 @@
 
 import type React from "react";
 
-import { FormInput, FormUploadImage } from "@/components/form";
+import { FormInput, FormSelect, FormUploadImage } from "@/components/form";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/tools";
-import useCategoryFormFeatures from "./features";
+import useSubcategoryFormFeatures from "./features";
 
-const CategoryFormModal: React.FC = () => {
+const SubcategoryFormModal: React.FC = () => {
 	const {
 		form,
 		isOpen,
@@ -19,14 +19,18 @@ const CategoryFormModal: React.FC = () => {
 		handleOpenChange,
 		handleFormSubmit,
 		handleNameChange,
+		isSubcategoryLoading,
+		category,
 		isCategoryLoading,
-	} = useCategoryFormFeatures();
+	} = useSubcategoryFormFeatures();
 	const { isSubmitting, isDirty } = form.formState;
 
 	return (
 		<Dialog open={isOpen} onOpenChange={handleOpenChange}>
 			<DialogContent>
-				<DialogTitle>{action === "edit" ? "Edit" : "Add"} Category</DialogTitle>
+				<DialogTitle>
+					{action === "edit" ? "Edit" : "Add"} Subategory
+				</DialogTitle>
 
 				<Form {...form}>
 					<form
@@ -37,25 +41,37 @@ const CategoryFormModal: React.FC = () => {
 						<FormInput
 							form={form}
 							name="name"
-							label="Enter category name"
+							label="Enter subcategory name"
 							onChange={(e) => handleNameChange(e.target.value)}
-							loading={isCategoryLoading}
+							loading={isSubcategoryLoading}
 						/>
 
 						{/* Slug Field */}
 						<FormInput
 							form={form}
 							name="slug"
-							label="Enter category slug"
-							loading={isCategoryLoading}
+							label="Enter subcategory slug"
+							loading={isSubcategoryLoading}
+						/>
+
+						{/* Category Field */}
+						<FormSelect
+							form={form}
+							name="category"
+							label="Select a category"
+							items={
+								category?.map((item) => ({ name: item.name, id: item.id })) ||
+								[]
+							}
+							loading={isSubcategoryLoading || isCategoryLoading}
 						/>
 
 						{/* Image Field */}
 						<FormUploadImage
 							form={form}
 							name="imageUrl"
-							label="Upload category image"
-							loading={isCategoryLoading}
+							label="Upload subcategory image"
+							loading={isSubcategoryLoading}
 						/>
 
 						{/* Button */}
@@ -67,11 +83,11 @@ const CategoryFormModal: React.FC = () => {
 							{isSubmitting ? <LoadingSpinner /> : ""}{" "}
 							{isSubmitting
 								? action === "add"
-									? "Adding new Category..."
-									: "Editing Category"
+									? "Adding new Subcategory..."
+									: "Editing Subcategory"
 								: action === "add"
-									? "Add Category"
-									: "Edit Category"}
+									? "Add Subcategory"
+									: "Edit Subcategory"}
 						</Button>
 					</form>
 				</Form>
@@ -80,4 +96,4 @@ const CategoryFormModal: React.FC = () => {
 	);
 };
 
-export default CategoryFormModal;
+export default SubcategoryFormModal;

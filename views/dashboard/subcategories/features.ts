@@ -1,16 +1,16 @@
 "use client";
 
+import { useSubcategoriesWithPagination } from "@/hooks/useQueryActions/useSubcategories";
 import debounce from "lodash/debounce";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { useCategoriesWithPagination } from "@/hooks/useQueryActions/useCategories";
-
-const useCategoriesFeatures = () => {
+const useSubcategoriesFeatures = () => {
 	const searchParams = useSearchParams();
 
 	const currentPage = Number(searchParams.get("page")) || 1;
 	const currentLimit = Number(searchParams.get("limit")) || 14;
+	const currentCategory = searchParams.get("category") || "";
 	const currentSearch = searchParams.get("search") || "";
 
 	const [debouncedSearch, setDebouncedSearch] = useState(currentSearch);
@@ -31,6 +31,7 @@ const useCategoriesFeatures = () => {
 		const params: {
 			page: number;
 			limit: number;
+			category?: string;
 			search?: string;
 		} = {
 			page: currentPage,
@@ -38,11 +39,12 @@ const useCategoriesFeatures = () => {
 		};
 
 		if (debouncedSearch) params.search = debouncedSearch;
+		if (currentCategory) params.category = currentCategory;
 
 		return params;
-	}, [currentPage, currentLimit, debouncedSearch]);
+	}, [currentPage, currentLimit, currentCategory, debouncedSearch]);
 
-	const { data, isLoading } = useCategoriesWithPagination(queryParams);
+	const { data, isLoading } = useSubcategoriesWithPagination(queryParams);
 
 	const formattedData = useMemo(
 		() => ({
@@ -72,4 +74,4 @@ const useCategoriesFeatures = () => {
 	};
 };
 
-export default useCategoriesFeatures;
+export default useSubcategoriesFeatures;

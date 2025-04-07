@@ -7,35 +7,37 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
 
+import { useCategories } from "@/hooks/useQueryActions/useCategories";
 import {
-	useAddCategory,
-	useEditCategory,
-	useGetCategory,
-} from "@/hooks/useQueryActions/useCategories";
-import { categoryFormSchema } from "@/schemas/category";
+	useAddSubcategory,
+	useEditSubcategory,
+	useGetSubcategory,
+} from "@/hooks/useQueryActions/useSubcategories";
+import { subcategoryFormSchema } from "@/schemas/subcategory";
 import { handleTextToSlug } from "@/utils/helper-fns/slug";
 
-const useCategoryFormFeatures = () => {
+const useSubcategoryFormFeatures = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
-	const categoryId = searchParams.get("categoryId") || "";
+	const subcategoryId = searchParams.get("subcategoryId") || "";
 	const action = searchParams.get("action") as "edit" | "add" | null;
 
-	const isOpen = !!((categoryId && action === "edit") || action === "add");
+	const isOpen = !!((subcategoryId && action === "edit") || action === "add");
 
-	const { mutateAsync: addCategory } = useAddCategory();
-	const { mutateAsync: editCategory } = useEditCategory();
-	const { data: category, isLoading: isCategoryLoading } = useGetCategory(
-		categoryId as string,
-	);
+	const { mutateAsync: addSubcategory } = useAddSubcategory();
+	const { mutateAsync: editSubcategory } = useEditSubcategory();
+	const { data: subcategory, isLoading: isSubcategoryLoading } =
+		useGetSubcategory(subcategoryId as string);
+	const { data: category, isLoading: isCategoryLoading } = useCategories();
 
-	const form = useForm<z.infer<typeof categoryFormSchema>>({
-		resolver: zodResolver(categoryFormSchema),
+	const form = useForm<z.infer<typeof subcategoryFormSchema>>({
+		resolver: zodResolver(subcategoryFormSchema),
 		defaultValues: {
 			name: "",
 			slug: "",
+			category: "",
 			imageUrl: "",
 		},
 	});
@@ -45,14 +47,15 @@ const useCategoryFormFeatures = () => {
 
 	// Set form values when category is loaded
 	useEffect(() => {
-		if (category && !isCategoryLoading) {
+		if (subcategory && !isSubcategoryLoading) {
 			reset({
-				name: category.name || "",
-				slug: category.slug || "",
-				imageUrl: category.imageUrl || "",
+				name: subcategory.name || "",
+				slug: subcategory.slug || "",
+				category: subcategory.category?.id || "",
+				imageUrl: subcategory.imageUrl || "",
 			});
 		}
-	}, [category, reset, isCategoryLoading]);
+	}, [subcategory, reset, isSubcategoryLoading]);
 
 	// Reset form on open in add mode
 	useEffect(() => {
@@ -61,6 +64,7 @@ const useCategoryFormFeatures = () => {
 				name: "",
 				slug: "",
 				imageUrl: "",
+				category: "",
 			});
 		}
 	}, [isOpen, action, reset]);
@@ -74,25 +78,25 @@ const useCategoryFormFeatures = () => {
 	};
 
 	const handleFormSubmit = async (
-		values: z.infer<typeof categoryFormSchema>,
+		values: z.infer<typeof subcategoryFormSchema>,
 	) => {
 		try {
-			if (categoryId) {
-				await editCategory({ categoryId, body: values });
+			if (subcategoryId) {
+				await editSubcategory({ subcategoryId, body: values });
 			} else {
-				await addCategory(values);
+				await addSubcategory(values);
 			}
 
 			resetFormAndRedirect();
 		} catch (error) {
-			toast.error(`Failed to ${categoryId ? "edit" : "add"} category.`);
+			toast.error(`Failed to ${subcategoryId ? "edit" : "add"} subcategory.`);
 		}
 	};
 
 	// Reset form and handle redirection
 	const resetFormAndRedirect = () => {
 		const newParams = new URLSearchParams(searchParams.toString());
-		newParams.delete("categoryId");
+		newParams.delete("subcategoryId");
 		newParams.delete("action");
 		newParams.delete("action-type");
 
@@ -104,16 +108,20 @@ const useCategoryFormFeatures = () => {
 		if (!state) resetFormAndRedirect();
 	};
 
+	console.log(category, "category");
+
 	return {
 		form,
 		hasErrors,
 		handleFormSubmit,
 		handleNameChange,
-		isCategoryLoading,
+		isSubcategoryLoading,
 		handleOpenChange,
 		isOpen,
 		action,
+		category,
+		isCategoryLoading,
 	};
 };
 
-export default useCategoryFormFeatures;
+export default useSubcategoryFormFeatures;

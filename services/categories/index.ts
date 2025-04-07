@@ -38,7 +38,7 @@ const createCategoriesService = ($axios: AxiosInstance) => ({
 			if (isAxiosError(error)) {
 				throw new Error(error?.response?.data?.message);
 			}
-			throw new Error("Failed to fetch user.");
+			throw new Error("Failed to fetch category.");
 		}
 	},
 
