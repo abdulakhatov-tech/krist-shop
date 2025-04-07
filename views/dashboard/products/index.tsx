@@ -4,6 +4,7 @@ import { DataTable } from "@/components/data-table";
 import columns from "./columns";
 import useProductsFeatures from "./features";
 import ProductActionFormModal from "./form-modal";
+import StockFormModal from "./stock-modal";
 
 const ProductsPageView = () => {
 	const { formattedData, isLoading } = useProductsFeatures();
@@ -20,10 +21,12 @@ const ProductsPageView = () => {
 					addable: true,
 					filterByCategory: true,
 					filterBySubcategory: true,
+					filterByPrice: true,
 				}}
 			/>
 
 			<ProductActionFormModal />
+			<StockFormModal />
 		</>
 	);
 };

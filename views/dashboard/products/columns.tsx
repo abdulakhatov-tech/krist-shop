@@ -12,6 +12,7 @@ import {
 	DataTableRowInfo,
 	DataTableRowSelection,
 	DataTableRowSelectionHeader,
+	DataTableStock,
 } from "@/components/data-table/column-actions";
 import type { IProduct } from "@/interfaces/product.interface";
 
@@ -51,6 +52,11 @@ const columns: ColumnDef<IProduct>[] = [
 		accessorKey: "originalPrice",
 		header: "Original Price",
 		cell: ({ row }) => <DataTablePrice dataKey="originalPrice" row={row} />,
+	},
+	{
+		accessorKey: "stock",
+		header: "Stock",
+		cell: ({ row }) => <DataTableStock row={row} />,
 	},
 	{
 		accessorKey: "createdBy",

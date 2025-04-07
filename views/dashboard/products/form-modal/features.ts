@@ -117,10 +117,8 @@ const useProductActionFormModalFeatures = () => {
 
 		if (productId) {
 			await editProduct(payload);
-			console.log(payload, "editing");
 		} else {
 			await addProduct({ ...payload, createdBy: user?.id });
-			console.log({ ...payload, createdBy: user?.id }, "adding");
 		}
 
 		resetFormAndRedirect();

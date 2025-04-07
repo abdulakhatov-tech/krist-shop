@@ -15,5 +15,6 @@ export interface DataTableProps<TData, TValue> {
 		addable?: boolean;
 		filterByCategory?: boolean;
 		filterBySubcategory?: boolean;
+		filterByPrice?: boolean;
 	};
 }

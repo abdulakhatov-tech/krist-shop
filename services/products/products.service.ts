@@ -87,6 +87,24 @@ const createProductsService = ($axios: AxiosInstance) => ({
 			throw new Error("Failed to delete product.");
 		}
 	},
+
+	async editProductStock({
+		productId,
+		body,
+	}: {
+		productId: string;
+		body: { color: string; size: string; quantity: number }[];
+	}): Promise<IProduct> {
+		try {
+			const { data } = await $axios.patch(`/products/stock/${productId}`, body);
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to edit product stock.");
+		}
+	},
 });
 
 export const useProductsService = () => {

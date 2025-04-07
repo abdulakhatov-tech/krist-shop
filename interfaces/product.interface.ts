@@ -33,14 +33,10 @@ export interface IProduct {
 		lastName: string;
 		role: UserType;
 	} | null;
-	colors: {
-		id: string;
-		name: string;
-		hexCode: string;
-	}[];
-	sizes: Pick<ISize, "id" & "name">[];
 	stock: {
 		id: string;
+		color: string;
+		size: string;
 		quantity: number;
 	}[];
 	createdAt: string;

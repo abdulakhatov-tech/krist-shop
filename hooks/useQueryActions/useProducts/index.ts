@@ -3,7 +3,9 @@ import { isAxiosError } from "axios";
 import { toast } from "sonner";
 import type { z } from "zod";
 
+import type { IProduct } from "@/interfaces/product.interface";
 import type { productFormSchema } from "@/schemas/product";
+import { productStockFormSchema } from "@/schemas/product-stock";
 import {
 	type FetchProductsParams,
 	useProductsService,
@@ -86,6 +88,27 @@ export const useDeleteProduct = () => {
 				toast.error(error?.response?.data?.message);
 			} else {
 				toast.error(error?.message || "Failed to delete product.");
+			}
+		},
+	});
+};
+
+export const useEditProductStock = () => {
+	const queryClient = useQueryClient();
+	const { editProductStock } = useProductsService();
+
+	return useMutation({
+		mutationFn: editProductStock,
+		onSuccess: (data: IProduct) => {
+			toast.success("Product stocked updated successfully!");
+			queryClient.invalidateQueries({ queryKey: ["products"] });
+			queryClient.invalidateQueries({ queryKey: ["products", data?.id] });
+		},
+		onError: (error) => {
+			if (isAxiosError(error)) {
+				toast.error(error?.response?.data?.message);
+			} else {
+				toast.error(error?.message || "Failed to edit product stock.");
 			}
 		},
 	});

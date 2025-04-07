@@ -1,3 +1,4 @@
+export { default as DataTableStock } from "./stock";
 export { default as DataTablePrice } from "./price";
 export { default as DataTableRowInfo } from "./row-info";
 export { default as DataTableCreatedAt } from "./created-at";

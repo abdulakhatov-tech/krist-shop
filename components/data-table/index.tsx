@@ -46,6 +46,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 		addable: false,
 		filterByCategory: false,
 		filterBySubcategory: false,
+		filterByPrice: false,
 	},
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable<TData>({
@@ -63,8 +64,14 @@ export function DataTable<TData extends { id: string }, TValue>({
 		totalPages: 23,
 	};
 
-	const { role, searchable, addable, filterByCategory, filterBySubcategory } =
-		actions;
+	const {
+		role,
+		searchable,
+		addable,
+		filterByCategory,
+		filterBySubcategory,
+		filterByPrice,
+	} = actions;
 
 	return (
 		<section id="user-table" className="w-full">
@@ -73,7 +80,7 @@ export function DataTable<TData extends { id: string }, TValue>({
 
 				<div className="flex items-center gap-2">
 					{searchable && <SearchData loading={loading} />}
-					<FilterByPrice />
+					{filterByPrice && <FilterByPrice />}
 					{role && <UserRoles loading={loading} />}
 					{filterByCategory && <DataTableFilterByCategory />}
 					{filterBySubcategory && <DataTableFilterBySubcategory />}
