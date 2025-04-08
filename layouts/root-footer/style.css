@@ -1,0 +1,21 @@
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	gap: 40px;
+}
+
+@media screen and (max-width: 900px) {
+	.wrapper {
+		display: grid;
+		gap: 35px;
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.wrapper {
+		display: grid;
+		gap: 30px;
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
