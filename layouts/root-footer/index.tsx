@@ -60,6 +60,9 @@ const RootFooter: React.FC = () => {
 										{isSubmitting ? <LoadingSpinner /> : <SendHorizontal />}
 									</button>
 								</form>
+								<span className="mt-1 inline-block">
+									Subscribe to our Newsletter
+								</span>
 							</li>
 						</ul>
 					</div>
@@ -85,6 +88,12 @@ const RootFooter: React.FC = () => {
 									className="hover:text-blue-500"
 								>
 									+998 99 528 98 96
+								</Link>
+							</li>
+							<li>FAQ</li>
+							<li>
+								<Link href="/contact-us" className="hover:text-blue-500">
+									Contact
 								</Link>
 							</li>
 						</ul>
@@ -156,8 +165,6 @@ const RootFooter: React.FC = () => {
 						<ul className="flex flex-col gap-4">
 							<li>Privacy Policy</li>
 							<li>Terms Of Use</li>
-							<li>FAQ</li>
-							<li>Contact</li>
 						</ul>
 
 						<FooterTitle title="Social Media" className="mt-6 mb-4" />
