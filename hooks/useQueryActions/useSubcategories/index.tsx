@@ -91,6 +91,7 @@ export const useAddSubcategory = () => {
 		onSuccess: () => {
 			toast.success("Subcategory added successfully!");
 			queryClient.invalidateQueries({ queryKey: ["subcategories"] });
+			queryClient.invalidateQueries({ queryKey: ["categories"] });
 		},
 		onError: (error) => {
 			if (isAxiosError(error)) {
@@ -112,6 +113,7 @@ export const useEditSubcategory = () => {
 			toast.success("Subcategory edited successfully!");
 			queryClient.invalidateQueries({ queryKey: ["subcategories"] });
 			queryClient.invalidateQueries({ queryKey: ["subcategories", data?.id] });
+			queryClient.invalidateQueries({ queryKey: ["categories"] });
 		},
 		onError: (error) => {
 			if (isAxiosError(error)) {
@@ -138,6 +140,7 @@ export const useDeleteSubcategory = () => {
 			queryClient.invalidateQueries({
 				queryKey: ["subcategories", subcategoryId],
 			});
+			queryClient.invalidateQueries({ queryKey: ["categories"] });
 		},
 		onError: (error) => {
 			if (isAxiosError(error)) {

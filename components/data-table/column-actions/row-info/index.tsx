@@ -20,8 +20,8 @@ const DataTableRowInfo: React.FC<DataTableRowInfoProps> = ({ row }) => {
 		<div className="flex items-center gap-2">
 			<div
 				className={cn(
-					!product?.imageUrl && "p-[6px]",
-					"rounded-full bg-[#556080] w-9 h-9 center border shadow-2xl",
+					!product?.imageUrl && "p-[6px] bg-[#556080]",
+					"rounded-full w-[38px] h-[38px] center border-2 shadow-2xl",
 				)}
 			>
 				<Image

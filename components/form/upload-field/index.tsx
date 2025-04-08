@@ -80,7 +80,8 @@ const FormUploadField = <T extends FieldValues>({
 											type="file"
 											onChange={(e) => handleFileChange(e, field.onChange)} // Pass field.onChange to update form value
 											className="hidden"
-											accept="image/jpeg, image/png, image/gif"
+											accept="image/jpeg, image/png, image/gif, image/svg+xml, image/webp"
+											disabled={uploading}
 										/>
 									</div>
 								</div>

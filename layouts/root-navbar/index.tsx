@@ -25,7 +25,7 @@ const RootNavbar: React.FC = () => {
 	if (!mounted) return null; // or a loading state
 
 	return (
-		<header className="py-4 border">
+		<header className="py-3 md:py-4 border">
 			<div className="container">
 				<nav className="flex items-center justify-between gap-6">
 					<div className="flex items-center gap-3">
