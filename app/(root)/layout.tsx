@@ -26,7 +26,7 @@ const RootLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
 		<>
 			<RootNavbar />
-			<main>{children}</main>
+			<main className="min-h-[60vh]">{children}</main>
 			<RootFooter />
 		</>
 	);

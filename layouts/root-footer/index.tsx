@@ -43,7 +43,7 @@ const RootFooter: React.FC = () => {
 							<li>
 								<form
 									onSubmit={handleFormSubmit}
-									className="relative min-w-[280px] max-w-[300px]"
+									className="relative min-w-[300px] max-w-[320px]"
 								>
 									<Input
 										placeholder="Enter your email"

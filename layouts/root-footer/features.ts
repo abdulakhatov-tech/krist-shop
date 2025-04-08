@@ -1,12 +1,37 @@
 import { useSubscriptionService } from "@/services/subscription";
 import { isAxiosError } from "axios";
-import { type FormEvent, useRef, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const useFooterFeatures = () => {
 	const emailRef = useRef<HTMLInputElement>(null);
 	const { subscribeToNewsletter } = useSubscriptionService();
 	const [isSubmitting, setIsSubmitting] = useState(false);
+
+	// Focus input when it enters the viewport
+	useEffect(() => {
+		const emailInput = emailRef.current;
+
+		if (!emailInput) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					// Replaced forEach with for...of
+					if (entry.isIntersecting) {
+						emailInput.focus(); // Focus the input when it enters the viewport
+					}
+				}
+			},
+			{ threshold: 0.5 }, // Trigger when 50% of the input is in view
+		);
+
+		observer.observe(emailInput);
+
+		return () => {
+			observer.disconnect();
+		};
+	}, []);
 
 	const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
