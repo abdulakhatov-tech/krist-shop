@@ -3,8 +3,10 @@ import {
 	ChartColumnStacked,
 	Gauge,
 	ListOrdered,
+	Mails,
 	Settings,
 	ShoppingCart,
+	TicketSlash,
 	Users,
 } from "lucide-react";
 
@@ -46,9 +48,14 @@ export const dashboardSidebarItems: DashboardSidebarItemType[] = [
 		icon: ChartColumnStacked,
 	},
 	{
-		title: "Stocks",
-		url: "/dashboard/stocks",
-		icon: Activity,
+		title: "Newsletters",
+		url: "/dashboard/newsletters",
+		icon: Mails,
+	},
+	{
+		title: "Banners",
+		url: "/dashboard/banners",
+		icon: TicketSlash,
 	},
 	{
 		title: "Settings",

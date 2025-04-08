@@ -13,7 +13,12 @@ interface DataTableRowActionsProps {
 			id: string;
 		};
 	};
-	typeId: "productId" | "userId" | "categoryId" | "subcategoryId";
+	typeId:
+		| "productId"
+		| "userId"
+		| "categoryId"
+		| "subcategoryId"
+		| "newsletterId";
 	actions?: {
 		view?: boolean;
 		edit?: boolean;
@@ -30,7 +35,13 @@ const DataTableRowAction: React.FC<DataTableRowActionsProps> = ({
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const type =
-		typeId === "productId" ? "product" : typeId === "userId" ? "user" : "";
+		typeId === "productId"
+			? "product"
+			: typeId === "userId"
+				? "user"
+				: typeId === "newsletterId"
+					? "newsletter"
+					: "";
 
 	// Function to generate a new URL with preserved query params
 	const generateUrl = (action: string) => {

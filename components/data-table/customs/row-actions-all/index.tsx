@@ -56,7 +56,7 @@ const RowActionsAll = <TData extends { id: string }>({
 					<AlertDialogAction
 						onClick={handleDeleteAll}
 						className="hover:bg-[crimson] bg-[#DB4444]"
-						disabled={loading}
+						disabled={true || loading}
 					>
 						{loading
 							? `Deleting (${filteredRowsLength})...`

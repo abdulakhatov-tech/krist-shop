@@ -12,6 +12,7 @@ export interface IProduct {
 	reviewCount: number;
 	imageUrl: string;
 	imageUrls: string[];
+	discount: number;
 	category?: {
 		id: string;
 		name: string;

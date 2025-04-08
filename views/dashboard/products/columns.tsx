@@ -14,6 +14,7 @@ import {
 	DataTableRowSelectionHeader,
 	DataTableStock,
 } from "@/components/data-table/column-actions";
+import { Checkbox } from "@/components/ui/checkbox";
 import type { IProduct } from "@/interfaces/product.interface";
 
 const columns: ColumnDef<IProduct>[] = [
@@ -57,6 +58,21 @@ const columns: ColumnDef<IProduct>[] = [
 		accessorKey: "stock",
 		header: "Stock",
 		cell: ({ row }) => <DataTableStock row={row} />,
+	},
+	{
+		accessorKey: "discount",
+		header: "Discount",
+		cell: ({ row }) => `${row.original.discount}%`,
+	},
+	{
+		accessorKey: "isBestSeller",
+		header: "Best Seller",
+		cell: ({ row }) => <Checkbox checked={row.original.isBestSeller} />,
+	},
+	{
+		accessorKey: "isFeatured",
+		header: "Featured",
+		cell: ({ row }) => <Checkbox checked={row.original.isFeatured} />,
 	},
 	{
 		accessorKey: "createdBy",

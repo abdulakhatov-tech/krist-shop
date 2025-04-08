@@ -111,7 +111,7 @@ const FormMultiUploadField = <T extends FieldValues>({
 										multiple
 										onChange={(e) => handleFileChange(e, field.onChange)}
 										className="hidden"
-										accept="image/jpeg, image/png, image/gif"
+										accept="image/jpeg, image/png, image/gif, image/svg+xml, image/webp"
 									/>
 								</div>
 							)}
