@@ -1,7 +1,7 @@
-import React from "react";
+import HomePageView from "@/views/home";
 
 const Home = () => {
-	return <section>Home</section>;
+	return <HomePageView />;
 };
 
 export default Home;
