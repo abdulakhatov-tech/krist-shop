@@ -1,3 +1,4 @@
+import { RootNavbar } from "@/layouts";
 import type { Metadata } from "next";
 import type React from "react";
 import type { ReactNode } from "react";
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 const RootLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
 		<>
-			<header>Header</header>
+			<RootNavbar />
 			<main>{children}</main>
 			<footer>Footer</footer>
 		</>
