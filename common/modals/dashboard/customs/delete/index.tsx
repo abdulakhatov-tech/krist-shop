@@ -6,6 +6,7 @@ import {
 	DialogContent,
 	DialogDescription,
 } from "@/components/ui/dialog";
+import { useDeleteBanner } from "@/hooks/useQueryActions/useBanners";
 import { useDeleteCategory } from "@/hooks/useQueryActions/useCategories";
 import { useDeleteNewsletter } from "@/hooks/useQueryActions/useNewsletters";
 import { useDeleteProduct } from "@/hooks/useQueryActions/useProducts";
@@ -14,6 +15,7 @@ import { useDeleteUser } from "@/hooks/useQueryActions/useUsers";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
+	BannerInfo,
 	CategoryInfo,
 	ProductInfo,
 	SubcategoryInfo,
@@ -31,18 +33,21 @@ const DeleteModal = () => {
 	const categoryId = searchParams.get("categoryId");
 	const subcategoryId = searchParams.get("subcategoryId");
 	const newsletterId = searchParams.get("newsletterId");
+	const bannerId = searchParams.get("bannerId");
 
 	const isUser = userId && action === "delete";
 	const isProduct = productId && action === "delete";
 	const isCategory = categoryId && action === "delete";
 	const isSubcategory = subcategoryId && action === "delete";
 	const isNewsLetter = newsletterId && action === "delete";
+	const isBanner = bannerId && action === "delete";
 
 	const { mutateAsync: deleteUser } = useDeleteUser();
 	const { mutateAsync: deleteProduct } = useDeleteProduct();
 	const { mutateAsync: deleteCategory } = useDeleteCategory();
 	const { mutateAsync: deleteSubcategory } = useDeleteSubcategory();
 	const { mutateAsync: deleteNewsletter } = useDeleteNewsletter();
+	const { mutateAsync: deleteBanner } = useDeleteBanner();
 
 	const handleOpenChange = (state: boolean) => {
 		if (!state) {
@@ -52,6 +57,7 @@ const DeleteModal = () => {
 			newParams.delete("categoryId");
 			newParams.delete("subcategoryId");
 			newParams.delete("newsletterId");
+			newParams.delete("bannerId");
 			newParams.delete("action");
 			router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
 		}
@@ -63,6 +69,7 @@ const DeleteModal = () => {
 		if (isCategory) await deleteCategory(categoryId);
 		if (isSubcategory) await deleteSubcategory(subcategoryId);
 		if (isNewsLetter) await deleteNewsletter(newsletterId);
+		if (isBanner) await deleteBanner(bannerId);
 
 		handleOpenChange(false);
 	};
@@ -72,7 +79,8 @@ const DeleteModal = () => {
 		!!isProduct ||
 		!!isCategory ||
 		!!isSubcategory ||
-		!!isNewsLetter;
+		!!isNewsLetter ||
+		!!isBanner;
 
 	return (
 		<Dialog open={open} onOpenChange={handleOpenChange}>
@@ -84,6 +92,7 @@ const DeleteModal = () => {
 				{isNewsLetter && (
 					<DialogTitle>Unsubscribe user from Newsletter</DialogTitle>
 				)}
+				{isBanner && <BannerInfo bannerId={bannerId} />}
 
 				<DialogDescription className="text-center">
 					This action cannot be undone. This will permanently remove your data

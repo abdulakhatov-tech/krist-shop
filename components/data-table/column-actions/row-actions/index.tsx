@@ -1,9 +1,25 @@
 "use client";
 
-import { ChartColumnIncreasing, Edit2, Eye, Trash2 } from "lucide-react";
+import {
+	ChartColumnIncreasing,
+	Edit2,
+	Ellipsis,
+	Eye,
+	TicketSlash,
+	Trash2,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import type React from "react";
+
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import { Button } from "@/components/ui/button";
 
@@ -18,12 +34,14 @@ interface DataTableRowActionsProps {
 		| "userId"
 		| "categoryId"
 		| "subcategoryId"
-		| "newsletterId";
+		| "newsletterId"
+		| "bannerId";
 	actions?: {
 		view?: boolean;
 		edit?: boolean;
 		stock?: boolean;
 		delete?: boolean;
+		banner?: boolean;
 	};
 }
 
@@ -41,7 +59,9 @@ const DataTableRowAction: React.FC<DataTableRowActionsProps> = ({
 				? "user"
 				: typeId === "newsletterId"
 					? "newsletter"
-					: "";
+					: typeId === "bannerId"
+						? "banner"
+						: "";
 
 	// Function to generate a new URL with preserved query params
 	const generateUrl = (action: string) => {
@@ -71,6 +91,8 @@ const DataTableRowAction: React.FC<DataTableRowActionsProps> = ({
 				return `Edit ${item} Details`;
 			case "delete":
 				return `Delete ${item}`;
+			case "banner":
+				return `Edit ${item} Banner`;
 			default:
 				return "Unknown Title";
 		}
@@ -95,6 +117,8 @@ const DataTableRowAction: React.FC<DataTableRowActionsProps> = ({
 							<ChartColumnIncreasing />
 						) : action === "edit" ? (
 							<Edit2 />
+						) : action === "banner" ? (
+							<TicketSlash />
 						) : (
 							<Trash2 />
 						)}

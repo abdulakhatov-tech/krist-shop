@@ -33,6 +33,11 @@ const columns: ColumnDef<IProduct>[] = [
 	{
 		accessorKey: "slug",
 		header: "Slug",
+		cell: ({ row }) => (
+			<div className="max-w-[10ch] truncate">
+				{row?.original?.slug || "No slug"}
+			</div>
+		),
 	},
 	{
 		accessorKey: "category",

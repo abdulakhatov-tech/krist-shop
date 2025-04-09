@@ -1,3 +1,4 @@
+import type { IBanner } from "@/interfaces/banner.interface";
 import type { ICategory } from "@/interfaces/category.interface";
 import type { INewsletter } from "@/interfaces/newsletter.interface";
 import type { IProduct } from "@/interfaces/product.interface";
@@ -11,7 +12,7 @@ interface PropsI<T> {
 }
 
 const DataTableCreatedAt = <
-	T extends IProduct | ICategory | ISubcategory | INewsletter,
+	T extends IProduct | ICategory | ISubcategory | INewsletter | IBanner,
 >({
 	row,
 }: PropsI<T>) => {

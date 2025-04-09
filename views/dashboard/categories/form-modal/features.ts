@@ -21,7 +21,7 @@ const useCategoryFormFeatures = () => {
 	const searchParams = useSearchParams();
 
 	const categoryId = searchParams.get("categoryId") || "";
-	const action = searchParams.get("action") as "edit" | "add" | null;
+	const action = searchParams.get("action") as "edit" | "add";
 
 	const isOpen = !!((categoryId && action === "edit") || action === "add");
 

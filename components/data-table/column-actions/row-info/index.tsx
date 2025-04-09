@@ -32,7 +32,7 @@ const DataTableRowInfo: React.FC<DataTableRowInfoProps> = ({ row }) => {
 					className="object-cover rounded-full overflow-hidden"
 				/>
 			</div>
-			{product.name}
+			<span className="max-w-[10ch] truncate">{product.name || "No name"}</span>
 		</div>
 	);
 };

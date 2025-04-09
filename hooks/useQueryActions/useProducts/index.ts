@@ -21,6 +21,17 @@ export const useProducts = (params: FetchProductsParams = {}) => {
 	});
 };
 
+export const useProductsWithoutPagination = () => {
+	const { fetchProductsWithoutPagination } = useProductsService();
+
+	return useQuery({
+		queryKey: ["products", "without-pagination"],
+		queryFn: () => fetchProductsWithoutPagination(),
+		staleTime: 1000 * 60 * 5,
+		retry: 2,
+	});
+};
+
 export const useGetProduct = (productId: string) => {
 	const { fetchProduct } = useProductsService();
 

@@ -9,12 +9,15 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useBannersWithoutPagination } from "@/hooks/useQueryActions/useBanners";
 import type { IBanner } from "@/interfaces/banner.interface";
 import { banners } from "@/utils/mock-data/banners";
 import CategoryListModal from "../category-list/mobile-mode";
 import BannerItem from "./banner-item";
 
 const Banners: React.FC = () => {
+	const { data, isLoading } = useBannersWithoutPagination();
+
 	return (
 		<Carousel
 			plugins={[
@@ -27,7 +30,7 @@ const Banners: React.FC = () => {
 			}}
 		>
 			<CarouselContent>
-				{banners?.map((banner: IBanner) => (
+				{data?.map((banner: IBanner) => (
 					<BannerItem key={banner?.id} {...banner} />
 				))}
 			</CarouselContent>

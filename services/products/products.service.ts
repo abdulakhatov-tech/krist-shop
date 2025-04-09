@@ -36,6 +36,18 @@ const createProductsService = ($axios: AxiosInstance) => ({
 		}
 	},
 
+	async fetchProductsWithoutPagination(): Promise<IProduct[]> {
+		try {
+			const { data } = await $axios.get("/products/all");
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to fetch products.");
+		}
+	},
+
 	async fetchProduct(productId: string): Promise<IProduct> {
 		try {
 			const { data } = await $axios.get(`/products/${productId}`);
