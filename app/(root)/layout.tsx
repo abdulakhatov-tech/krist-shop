@@ -1,4 +1,5 @@
 import { RootFooter, RootNavbar } from "@/layouts";
+import { SuspenseLoading } from "@/tools";
 import type { Metadata } from "next";
 import type React from "react";
 import type { ReactNode } from "react";
@@ -26,7 +27,9 @@ const RootLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
 		<>
 			<RootNavbar />
-			<main className="min-h-[60vh]">{children}</main>
+			<main className="min-h-[60vh]">
+				<SuspenseLoading mode="dashboard">{children}</SuspenseLoading>
+			</main>
 			<RootFooter />
 		</>
 	);
