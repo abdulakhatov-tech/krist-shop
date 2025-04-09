@@ -23,7 +23,7 @@ const BrowseByCategorySecion = () => {
 	}, [categoryFromURL]);
 
 	return (
-		<section id="browse-by-category" className="py-8 md:py-10">
+		<section id="browse-by-category" className="py-10 md:py-20">
 			<div className="container">
 				<Carousel>
 					<Header isLoading={isLoading} slug={slug} />
