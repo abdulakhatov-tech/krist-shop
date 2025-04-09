@@ -68,7 +68,6 @@ const FilterByPrice = () => {
 
 	useEffect(() => {
 		setRange([initialMin, initialMax]);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [initialMin, initialMax]);
 
 	return (

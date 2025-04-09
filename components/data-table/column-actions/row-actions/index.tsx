@@ -3,7 +3,6 @@
 import {
 	ChartColumnIncreasing,
 	Edit2,
-	Ellipsis,
 	Eye,
 	TicketSlash,
 	Trash2,
@@ -11,15 +10,6 @@ import {
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import type React from "react";
-
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 import { Button } from "@/components/ui/button";
 
