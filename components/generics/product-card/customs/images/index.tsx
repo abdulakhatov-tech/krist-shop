@@ -35,29 +35,29 @@ const RenderImages: FC<RenderImagesProps> = ({
 		return noSlide ? [] : [Autoplay({ delay: 2000, stopOnInteraction: false })];
 	}, [noSlide]);
 
-	//   if (imageUrls.length > 0) {
-	//     return (
-	//       <Carousel plugins={carouselPlugins}>
-	//         <CarouselContent>
-	//           {imageUrls.map((url, index) => (
-	//             <CarouselItem key={index}>
-	//               <div className="relative w-full aspect-[2/3]">
-	//                 <Image
-	//                   src={url}
-	//                   alt={`Product image ${index + 1}`}
-	//                   fill
-	//                   className="object-contain rounded"
-	//                   sizes="(max-width: 768px) 100vw, 700px"
-	//                 />
-	//               </div>
-	//             </CarouselItem>
-	//           ))}
-	//         </CarouselContent>
-	//         <CarouselPrevious />
-	//         <CarouselNext />
-	//       </Carousel>
-	//     );
-	//   }
+	if (imageUrls?.length > 0) {
+		return (
+			<Carousel plugins={carouselPlugins}>
+				<CarouselContent>
+					{imageUrls.map((url, index) => (
+						<CarouselItem key={crypto.randomUUID()}>
+							<div className="relative w-full aspect-[2/3]">
+								<Image
+									src={url}
+									alt={`Product image ${index + 1}`}
+									fill
+									className="object-contain rounded"
+									sizes="(max-width: 768px) 100vw, 700px"
+								/>
+							</div>
+						</CarouselItem>
+					))}
+				</CarouselContent>
+				<CarouselPrevious />
+				<CarouselNext />
+			</Carousel>
+		);
+	}
 
 	return (
 		<PhotoProvider>
