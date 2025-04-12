@@ -14,7 +14,7 @@ const BestSellingProducts = () => {
 	const { data: bestSellingProducts, isLoading } = useBestSellingProducts();
 
 	return (
-		<section id="best-selling-products" className="py-10">
+		<section id="best-selling-products" className="py-4 sm:py-6 md:py-10">
 			<div className="container">
 				<Carousel>
 					<Header />

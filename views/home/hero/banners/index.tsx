@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/carousel";
 import { useBannersWithoutPagination } from "@/hooks/useQueryActions/useBanners";
 import type { IBanner } from "@/interfaces/banner.interface";
-import { banners } from "@/utils/mock-data/banners";
 import CategoryListModal from "../category-list/mobile-mode";
 import BannerItem from "./banner-item";
+import Loading from "./loading";
 
 const Banners: React.FC = () => {
 	const { data, isLoading } = useBannersWithoutPagination();
@@ -30,9 +30,13 @@ const Banners: React.FC = () => {
 			}}
 		>
 			<CarouselContent>
-				{data?.map((banner: IBanner) => (
-					<BannerItem key={banner?.id} {...banner} />
-				))}
+				{isLoading ? (
+					<Loading />
+				) : (
+					data?.map((banner: IBanner) => (
+						<BannerItem key={banner?.id} {...banner} />
+					))
+				)}
 			</CarouselContent>
 			<CarouselPrevious className="top-64 md:top-90 left-5" />
 			<CarouselNext className="top-64 md:top-90 right-5" />

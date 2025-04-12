@@ -3,7 +3,7 @@ import CategoryList from "./category-list";
 
 const Hero = () => {
 	return (
-		<section id="hero" className="pt-4 md:pt-8 pb-4">
+		<section id="hero" className="py-4 sm:py-6 md:py-8">
 			<div className="container">
 				<div className="grid md:grid-cols-[260px_1fr] gap-2">
 					{/* Category list */}
