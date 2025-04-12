@@ -5,10 +5,10 @@ const Loading = () => {
 	return (
 		<>
 			<CarouselItem className="w-full">
-				<Skeleton className="!w-full h-[300px] md:h-[400px] relative" />
+				<Skeleton className="!w-full h-[300px] md:h-[400px]" />
 			</CarouselItem>
 			<CarouselItem className="w-full">
-				<Skeleton className="!w-full h-[300px] md:h-[400px] relative" />
+				<Skeleton className="!w-full h-[300px] md:h-[400px]" />
 			</CarouselItem>
 		</>
 	);
