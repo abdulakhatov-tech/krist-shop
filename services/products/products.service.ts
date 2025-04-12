@@ -60,6 +60,42 @@ const createProductsService = ($axios: AxiosInstance) => ({
 		}
 	},
 
+	async fetchBestSellingProducts(): Promise<IProduct[]> {
+		try {
+			const { data } = await $axios.get("/products/all/best-sellers");
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to fetch best sellers.");
+		}
+	},
+
+	async fetchNewArrivals(): Promise<IProduct[]> {
+		try {
+			const { data } = await $axios.get("/products/all/new-arrivals");
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to fetch new arrivals.");
+		}
+	},
+
+	async fetchFeaturedProducts(): Promise<IProduct[]> {
+		try {
+			const { data } = await $axios.get("/products/all/featured");
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to fetch featured products.");
+		}
+	},
+
 	async addProduct(
 		body: z.infer<typeof productFormSchema> & { createdBy?: string },
 	): Promise<IProduct> {

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const CustomerPromises = () => {
 	return (
-		<section id="customer-promises" className="py-10 md:py-20">
+		<section id="customer-promises" className="pt-10 pb-20">
 			<div className="container">
 				<ul className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
 					{customerPromisesData?.map(({ id, title, description, image }) => (

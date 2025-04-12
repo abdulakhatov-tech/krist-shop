@@ -123,3 +123,36 @@ export const useEditProductStock = () => {
 		},
 	});
 };
+
+export const useBestSellingProducts = () => {
+	const { fetchBestSellingProducts } = useProductsService();
+
+	return useQuery({
+		queryKey: ["products", "best-selling"],
+		queryFn: () => fetchBestSellingProducts(),
+		staleTime: 1000 * 60 * 5,
+		retry: 2,
+	});
+};
+
+export const useNewArrivals = () => {
+	const { fetchNewArrivals } = useProductsService();
+
+	return useQuery({
+		queryKey: ["products", "new-arrivals"],
+		queryFn: () => fetchNewArrivals(),
+		staleTime: 1000 * 60 * 5,
+		retry: 2,
+	});
+};
+
+export const useFeaturedProducts = () => {
+	const { fetchFeaturedProducts } = useProductsService();
+
+	return useQuery({
+		queryKey: ["products", "featured"],
+		queryFn: () => fetchFeaturedProducts(),
+		staleTime: 1000 * 60 * 5,
+		retry: 2,
+	});
+};
