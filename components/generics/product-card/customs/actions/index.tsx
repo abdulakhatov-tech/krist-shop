@@ -7,11 +7,7 @@ import type { FC } from "react";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
-import {
-	useAddToCart,
-	useGetCart,
-	useIncrementCartItemQuantity,
-} from "@/hooks/useQueryActions/useCart";
+import { useAddToCart, useGetCart } from "@/hooks/useQueryActions/useCart";
 import {
 	useAddToWishlist,
 	useGetWishlist,
@@ -39,8 +35,6 @@ const ActionButtons: FC<{
 	const { data: cart, isLoading: isCartLoading } = useGetCart(user?.id);
 
 	const { mutateAsync: addToCart } = useAddToCart();
-	const { mutateAsync: incrementCartItemQuantity } =
-		useIncrementCartItemQuantity();
 
 	const isProductInWishlist = bookmark?.some(
 		(wishlist: IWishlist) => wishlist.product.id === product.id,
