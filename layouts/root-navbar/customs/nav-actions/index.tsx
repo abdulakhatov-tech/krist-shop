@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { useGetCart } from "@/hooks/useQueryActions/useCart";
 import { useGetWishlist } from "@/hooks/useQueryActions/useWishlist";
 import type { IUser } from "@/interfaces/user.interface";
+import Link from "next/link";
 
 const NavActions: React.FC = () => {
 	const user = useAuthUser() as IUser;
@@ -29,19 +30,21 @@ const NavActions: React.FC = () => {
 					<Search onClick={() => handleClick("search")} />
 				</CustomTooltip>
 			</li>
-			<li className="relative">
-				<CustomTooltip title={"Heart"}>
-					{wishlist?.length ? (
-						<Badge className="bg-red-600 rounded-full absolute -top-3 -right-4 center">
-							{isWishlistLoading ? <LoadingSpinner /> : wishlist?.length}
-						</Badge>
-					) : (
-						""
-					)}
+			<Link href="/wishlist">
+				<li className="relative">
+					<CustomTooltip title={"Heart"}>
+						{wishlist?.length ? (
+							<Badge className="bg-red-600 rounded-full absolute -top-3 -right-4 center">
+								{isWishlistLoading ? <LoadingSpinner /> : wishlist?.length}
+							</Badge>
+						) : (
+							""
+						)}
 
-					<Heart onClick={() => handleClick("favorites")} />
-				</CustomTooltip>
-			</li>
+						<Heart onClick={() => handleClick("favorites")} />
+					</CustomTooltip>
+				</li>
+			</Link>
 			<li className="relative">
 				<CustomTooltip title={"Shopping Cart"}>
 					{cart?.length ? (
