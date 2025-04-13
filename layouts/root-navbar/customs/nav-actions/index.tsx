@@ -31,17 +31,31 @@ const NavActions: React.FC = () => {
 			</li>
 			<li className="relative">
 				<CustomTooltip title={"Heart"}>
-					<Badge className="bg-red-600 rounded-full absolute -top-3 -right-4 center">
-						{isWishlistLoading ? <LoadingSpinner /> : wishlist?.length}
-					</Badge>
+					{wishlist?.length ? (
+						<Badge className="bg-red-600 rounded-full absolute -top-3 -right-4 center">
+							{isWishlistLoading ? <LoadingSpinner /> : wishlist?.length}
+						</Badge>
+					) : (
+						""
+					)}
+
 					<Heart onClick={() => handleClick("favorites")} />
 				</CustomTooltip>
 			</li>
 			<li className="relative">
 				<CustomTooltip title={"Shopping Cart"}>
-					<Badge className="bg-red-600 rounded-full absolute -top-3 -right-4 center">
-						{isCartLoading ? <LoadingSpinner /> : cart?.length}
-					</Badge>
+					{cart?.length ? (
+						<Badge className="bg-red-600 rounded-full absolute -top-3 -right-4 center">
+							{isCartLoading ? (
+								<LoadingSpinner />
+							) : (
+								cart?.reduce((acc, item) => acc + item.quantity, 0)
+							)}
+						</Badge>
+					) : (
+						""
+					)}
+
 					<ShoppingBasket onClick={() => handleClick("shopping-cart")} />
 				</CustomTooltip>
 			</li>

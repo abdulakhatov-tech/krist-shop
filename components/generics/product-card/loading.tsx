@@ -3,7 +3,7 @@ import { Star } from "lucide-react";
 
 const ProductCardLoading = () => {
 	return (
-		<div className="border custom-shadow p-2 rounded-[8px]  transition-transform duration-300 ease-in-out transform hover:scale-[0.95] hover:shadow-lg bg-accent hover:bg-gray-50 w-fit">
+		<div className="border custom-shadow p-2 rounded-[8px]  transition-transform duration-300 ease-in-out transform hover:scale-[0.95] hover:shadow-lg bg-accent hover:bg-gray-50">
 			<div className="max-h-[240px] sm:max-h-[245px] w-full overflow-hidden rounded-[6px] border bg-white">
 				<Skeleton className="w-full h-[300px]" />
 			</div>

@@ -5,18 +5,23 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { FC } from "react";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
-import { useAddToCart } from "@/hooks/useQueryActions/useCart";
+import {
+	useAddToCart,
+	useGetCart,
+	useIncrementCartItemQuantity,
+} from "@/hooks/useQueryActions/useCart";
 import {
 	useAddToWishlist,
 	useGetWishlist,
 	useRemoveFromWishlist,
 } from "@/hooks/useQueryActions/useWishlist";
+import type { ICart } from "@/interfaces/cart.interface";
 import type { IProduct } from "@/interfaces/product.interface";
 import type { IUser } from "@/interfaces/user.interface";
 import type { IWishlist } from "@/interfaces/wishlist.interface";
 import { CustomTooltip, LoadingSpinner } from "@/tools";
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 const ActionButtons: FC<{
 	product: IProduct;
@@ -31,11 +36,20 @@ const ActionButtons: FC<{
 		user?.id,
 	);
 
+	const { data: cart, isLoading: isCartLoading } = useGetCart(user?.id);
+
 	const { mutateAsync: addToCart } = useAddToCart();
+	const { mutateAsync: incrementCartItemQuantity } =
+		useIncrementCartItemQuantity();
 
 	const isProductInWishlist = bookmark?.some(
 		(wishlist: IWishlist) => wishlist.product.id === product.id,
 	);
+
+	const exisitingProductInCart = cart?.find(
+		(cart: ICart) => cart.product.id === product.id,
+	);
+	console.log(exisitingProductInCart, "exisitingProductInCart");
 
 	const handleWishlist = async () => {
 		if (!isAuthenticated) {
@@ -63,13 +77,13 @@ const ActionButtons: FC<{
 	const handleAddToCart = async () => {
 		if (!isAuthenticated) {
 			router.push("/auth/sign-in");
+			return;
 		}
 
 		if (user?.id && product) {
 			await addToCart({
 				userId: user?.id,
 				productId: product?.id,
-				quantity: 1,
 			});
 		}
 	};
@@ -98,10 +112,16 @@ const ActionButtons: FC<{
 				onClick={handleAddToCart}
 				onKeyUp={(e) => e.code === "Enter" && handleAddToCart()}
 				onKeyDown={(e) => e.code === "Enter" && handleAddToCart()}
-				className="w-7 md:w-8 h-7 md:h-8 rounded-full bg-[orange] center custom-shadow hover:bg-orange active:bg-orange text-white p-[5px]"
+				className="w-7 md:w-8 h-7 md:h-8 rounded-full bg-[orange] center custom-shadow hover:bg-orange active:bg-orange text-white p-[5px] relative"
 			>
-				<CustomTooltip title="Add Product to Cart">
-					<ShoppingBasket />
+				<CustomTooltip
+					title={
+						!exisitingProductInCart
+							? "Add Product to Cart"
+							: `Increment Quantity (${exisitingProductInCart?.quantity} items already exist)`
+					}
+				>
+					{isCartLoading ? <LoadingSpinner /> : <ShoppingBasket />}
 				</CustomTooltip>
 			</div>
 			<Link href={`/products/details/${product.id}`}>

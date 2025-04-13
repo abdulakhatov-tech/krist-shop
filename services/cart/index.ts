@@ -5,7 +5,6 @@ import { useAxios } from "../api/axios.service";
 interface IBody {
 	userId: string;
 	productId: string;
-	quantity: number;
 }
 
 const createCartService = ($axios: AxiosInstance) => ({
@@ -21,15 +20,27 @@ const createCartService = ($axios: AxiosInstance) => ({
 		}
 	},
 
-	async updateQuantity(body: IBody): Promise<ICart> {
+	async incrementQuantity(body: IBody): Promise<ICart> {
 		try {
-			const { data } = await $axios.patch("/cart", body);
+			const { data } = await $axios.patch("/cart/increment-quantity", body);
 			return data?.data;
 		} catch (error) {
 			if (isAxiosError(error)) {
 				throw new Error(error?.response?.data?.message);
 			}
-			throw new Error("Failed to update cart item.");
+			throw new Error("Failed to increment cart item.");
+		}
+	},
+
+	async decrementQuantity(body: IBody): Promise<ICart> {
+		try {
+			const { data } = await $axios.patch("/cart/decrement-quantity", body);
+			return data?.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to decrement cart item.");
 		}
 	},
 

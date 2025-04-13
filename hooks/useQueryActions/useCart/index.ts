@@ -45,14 +45,14 @@ export const useRemoveFromCart = () => {
 	});
 };
 
-export const updateCartItemQuantity = () => {
+export const useIncrementCartItemQuantity = () => {
 	const queryClient = useQueryClient();
-	const { updateQuantity } = useCartService();
+	const { incrementQuantity } = useCartService();
 
 	return useMutation({
-		mutationFn: updateQuantity,
+		mutationFn: incrementQuantity,
 		onSuccess: (data: ICart) => {
-			toast.success("Cart item quantity updated.");
+			toast.success("Cart item quantity incremented.");
 			queryClient.invalidateQueries({ queryKey: ["cart"] });
 			queryClient.invalidateQueries({ queryKey: ["cart", data?.id] });
 		},
@@ -60,7 +60,32 @@ export const updateCartItemQuantity = () => {
 			if (isAxiosError(error)) {
 				toast.error(error?.response?.data?.message);
 			} else {
-				toast.error(error?.message || "Failed to update cart item quantity.");
+				toast.error(
+					error?.message || "Failed to increment cart item quantity.",
+				);
+			}
+		},
+	});
+};
+
+export const useDecrementCartItemQuantity = () => {
+	const queryClient = useQueryClient();
+	const { decrementQuantity } = useCartService();
+
+	return useMutation({
+		mutationFn: decrementQuantity,
+		onSuccess: (data: ICart) => {
+			toast.success("Cart item quantity decremented.");
+			queryClient.invalidateQueries({ queryKey: ["cart"] });
+			queryClient.invalidateQueries({ queryKey: ["cart", data?.id] });
+		},
+		onError: (error) => {
+			if (isAxiosError(error)) {
+				toast.error(error?.response?.data?.message);
+			} else {
+				toast.error(
+					error?.message || "Failed to decrement cart item quantity.",
+				);
 			}
 		},
 	});
