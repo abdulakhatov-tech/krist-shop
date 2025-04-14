@@ -11,11 +11,26 @@ import { setResetPasswordModalVisibility } from "@/redux/slices/modals/resetPass
 import { resetPasswordFormSchema } from "@/schemas/auth/resetPasswordFormSchema";
 import { useAuthService } from "@/services/auth/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 
 const useResetPasswordPageViewFeatures = () => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 	const { resetPassword } = useAuthService();
+
+	const [identifier, setIdentifier] = useState<string | null>(null);
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const id = localStorage.getItem("identifier");
+			if (!id) {
+				localStorage.removeItem("identifier");
+				router.push("/auth/forgot-password");
+			} else {
+				setIdentifier(id);
+			}
+		}
+	}, [router]);
 
 	const form = useForm<z.infer<typeof resetPasswordFormSchema>>({
 		resolver: zodResolver(resetPasswordFormSchema),
@@ -31,14 +46,8 @@ const useResetPasswordPageViewFeatures = () => {
 		values: z.infer<typeof resetPasswordFormSchema>,
 	) => {
 		try {
-			let identifier: string | null = null;
-			if (typeof window !== "undefined") {
-				identifier = localStorage.getItem("identifier");
-			}
 			if (!identifier) {
-				if (typeof window !== "undefined") {
-					localStorage.removeItem("identifier");
-				}
+				toast.error("No identifier found. Please try again.");
 				router.push("/auth/forgot-password");
 				return;
 			}
@@ -49,19 +58,19 @@ const useResetPasswordPageViewFeatures = () => {
 			});
 
 			if (success) {
-				toast(message || "New Password reset successfull!");
+				toast(message || "New Password reset successful!");
 
 				dispatch(setResetPasswordModalVisibility(true));
 				reset();
-			}
 
-			if (typeof window !== "undefined") {
-				localStorage.removeItem("identifier");
+				if (typeof window !== "undefined") {
+					localStorage.removeItem("identifier");
+				}
 			}
 		} catch (error) {
 			if (error instanceof AxiosError) {
 				const errorMessage = error.response?.data?.message;
-				toast(errorMessage || "Failed to send OTP code!");
+				toast.error(errorMessage || "Failed to reset password!");
 			}
 		}
 	};
