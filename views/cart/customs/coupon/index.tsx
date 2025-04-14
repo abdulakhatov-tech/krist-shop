@@ -10,7 +10,6 @@ const Coupon = () => {
 	const { form, hasErrors, handleFormSubmit, isCartLoading } =
 		useCouponFeatures();
 	const { isSubmitting } = form.formState;
-
 	const isCouponAvailable = !!localStorage.getItem("coupon-discount");
 
 	return (
