@@ -24,7 +24,7 @@ const GenericBreadcrumb: React.FC<GenericBreadcrumbProps> = ({ links }) => {
 
 	return (
 		<Breadcrumb>
-			<BreadcrumbList className="py-4 flex items-center gap-2">
+			<BreadcrumbList className="py-6 flex items-center gap-2">
 				{links.map((item, index) => (
 					<React.Fragment key={item.id}>
 						<BreadcrumbItem>

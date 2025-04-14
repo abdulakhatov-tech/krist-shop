@@ -1,6 +1,7 @@
 "use client";
 
 import { isAxiosError } from "axios";
+import { useEffect, useState } from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -13,7 +14,6 @@ import { setCoupon } from "@/redux/slices/coupon";
 import { couponFormSchema } from "@/schemas/coupon";
 import { useCouponService } from "@/services/coupon";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
 
 const useCouponFeatures = () => {
 	const dispatch = useAppDispatch();

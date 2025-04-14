@@ -1,5 +1,7 @@
+import CheckoutPageView from "@/views/checkout";
+
 const Checkout = () => {
-	return <div>Checkout</div>;
+	return <CheckoutPageView />;
 };
 
 export default Checkout;

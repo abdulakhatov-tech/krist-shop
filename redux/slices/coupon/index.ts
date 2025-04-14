@@ -4,12 +4,14 @@ interface IInitialState {
 	code: string;
 	discount: number;
 	total: number;
+	shippingType: "pickup" | "courier" | "postal";
 }
 
 const initialState: IInitialState = {
 	code: "",
 	discount: 0,
 	total: 0,
+	shippingType: "pickup",
 };
 
 const couponCodeSlice = createSlice({
@@ -26,8 +28,14 @@ const couponCodeSlice = createSlice({
 			state.discount = 0;
 			state.total = 0;
 		},
+		setShipping: (
+			state,
+			action: PayloadAction<"pickup" | "courier" | "postal">,
+		) => {
+			state.shippingType = action.payload;
+		},
 	},
 });
 
-export const { setCoupon, clearCoupon } = couponCodeSlice.actions;
+export const { setCoupon, clearCoupon, setShipping } = couponCodeSlice.actions;
 export default couponCodeSlice.reducer;
