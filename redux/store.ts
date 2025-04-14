@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import couponCodeSlice from "./slices/coupon";
 import { resetPasswordSuccessModalSlice } from "./slices/modals";
 
 export const makeStore = () => {
 	return configureStore({
 		reducer: {
 			resetPasswordSuccessModalSlice,
+			couponCodeSlice,
 		},
 	});
 };

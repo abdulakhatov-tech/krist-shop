@@ -39,7 +39,7 @@ const columns: ColumnDef<IBanner>[] = [
 			const isActive = row.original.isActive;
 			return (
 				<span
-					className={`py-1 px-2 rounded-sm text-white ${isActive ? "bg-green-400 " : "bg-[crimson]"}`}
+					className={`py-1 px-2 rounded-sm text-white ${isActive ? "bg-green-400 " : "bg-[#DB4444]"}`}
 				>
 					{isActive ? "Active" : "Inactive"}
 				</span>

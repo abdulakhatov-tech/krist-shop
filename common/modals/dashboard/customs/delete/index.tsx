@@ -110,7 +110,7 @@ const DeleteModal = () => {
 					<Button
 						onClick={handleDelete}
 						size="lg"
-						className="hover:bg-[crimson] bg-[#DB4444]"
+						className="hover:bg-[#DB4444] bg-[#DB4444]"
 					>
 						Delete
 					</Button>

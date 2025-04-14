@@ -11,6 +11,18 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/ui/carousel";
+
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useAddToCart } from "@/hooks/useQueryActions/useCart";
 import { useGetWishlist } from "@/hooks/useQueryActions/useWishlist";
 import type { IUser } from "@/interfaces/user.interface";
@@ -50,9 +62,25 @@ const WishlistPageView = () => {
 							</h2>
 
 							<div className="flex items-center justify-between gap-16">
-								<Button variant={"outline"} onClick={handleAddAllToCart}>
-									Add All To Cart
-								</Button>
+								<AlertDialog>
+									<AlertDialogTrigger className="border px-4 py-1 rounded-md font-semibold">
+										Add All To Cart
+									</AlertDialogTrigger>
+									<AlertDialogContent>
+										<AlertDialogHeader>
+											<AlertDialogTitle>Are you sure ?</AlertDialogTitle>
+											<AlertDialogDescription>
+												Do you want to add all wishlist products to Cart ?
+											</AlertDialogDescription>
+										</AlertDialogHeader>
+										<AlertDialogFooter>
+											<AlertDialogCancel>Cancel</AlertDialogCancel>
+											<AlertDialogAction onClick={handleAddAllToCart}>
+												Confirm
+											</AlertDialogAction>
+										</AlertDialogFooter>
+									</AlertDialogContent>
+								</AlertDialog>
 								<div className="relative flex items-center justify-between shrink-0 w-[30px]">
 									<CarouselPrevious className="right-10 bg-accent" />
 									<CarouselNext className="right-0 bg-accent" />

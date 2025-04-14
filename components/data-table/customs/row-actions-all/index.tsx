@@ -55,7 +55,7 @@ const RowActionsAll = <TData extends { id: string }>({
 					<AlertDialogCancel>Cancel</AlertDialogCancel>
 					<AlertDialogAction
 						onClick={handleDeleteAll}
-						className="hover:bg-[crimson] bg-[#DB4444]"
+						className="hover:bg-[#DB4444] bg-[#DB4444]"
 						disabled={true || loading}
 					>
 						{loading

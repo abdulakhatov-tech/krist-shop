@@ -29,7 +29,7 @@ const ProductCard: FC<{ product: IProduct; noSlide?: boolean }> = ({
 					noSlide={noSlide}
 				/>
 				{discount ? (
-					<span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-lg cursor-pointer">
+					<span className="absolute top-2 left-2 bg-[#DB4444] text-white text-xs font-semibold px-2 py-1 rounded-md shadow-lg cursor-pointer">
 						{discount}% OFF
 					</span>
 				) : (
@@ -48,8 +48,8 @@ const ProductCard: FC<{ product: IProduct; noSlide?: boolean }> = ({
 					</h3>
 				</div>
 				<div className="flex flex-wrap items-center gap-1">
-					<Badge className="bg-red-600">{category?.name}</Badge>
-					<Badge className="bg-red-600">{subcategory?.name}</Badge>
+					<Badge className="bg-[#DB4444]">{category?.name}</Badge>
+					<Badge className="bg-[#DB4444]">{subcategory?.name}</Badge>
 				</div>
 
 				<StarRating rating={rating} />

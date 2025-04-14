@@ -97,7 +97,7 @@ const DataTableRowAction: React.FC<DataTableRowActionsProps> = ({
 						size="sm"
 						className={`hover:scale-95 ${
 							action === "delete"
-								? "bg-[crimson] hover:bg-[#DB4444] active:bg-red-600"
+								? "bg-[#DB4444] hover:bg-[#DB4444] active:bg-[#DB4444]"
 								: "bg-[#001529] hover:bg-blue-700 active:bg-blue-800"
 						}`}
 					>

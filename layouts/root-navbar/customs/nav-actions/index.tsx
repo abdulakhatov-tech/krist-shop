@@ -34,7 +34,7 @@ const NavActions: React.FC = () => {
 				<li className="relative">
 					<CustomTooltip title={"Heart"}>
 						{wishlist?.length ? (
-							<Badge className="bg-red-600 rounded-full absolute -top-3 -right-4 center">
+							<Badge className="bg-[#DB4444] rounded-full absolute -top-3 -right-4 center">
 								{isWishlistLoading ? <LoadingSpinner /> : wishlist?.length}
 							</Badge>
 						) : (
@@ -45,23 +45,25 @@ const NavActions: React.FC = () => {
 					</CustomTooltip>
 				</li>
 			</Link>
-			<li className="relative">
-				<CustomTooltip title={"Shopping Cart"}>
-					{cart?.length ? (
-						<Badge className="bg-red-600 rounded-full absolute -top-3 -right-4 center">
-							{isCartLoading ? (
-								<LoadingSpinner />
-							) : (
-								cart?.reduce((acc, item) => acc + item.quantity, 0)
-							)}
-						</Badge>
-					) : (
-						""
-					)}
+			<Link href="/cart">
+				<li className="relative">
+					<CustomTooltip title={"Shopping Cart"}>
+						{cart?.length ? (
+							<Badge className="bg-[#DB4444] rounded-full absolute -top-3 -right-4 center">
+								{isCartLoading ? (
+									<LoadingSpinner />
+								) : (
+									cart?.reduce((acc, item) => acc + item.quantity, 0)
+								)}
+							</Badge>
+						) : (
+							""
+						)}
 
-					<ShoppingBasket onClick={() => handleClick("shopping-cart")} />
-				</CustomTooltip>
-			</li>
+						<ShoppingBasket onClick={() => handleClick("shopping-cart")} />
+					</CustomTooltip>
+				</li>
+			</Link>
 		</ul>
 	);
 };

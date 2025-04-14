@@ -24,6 +24,7 @@ const FormInputField = <T extends FieldValues>({
 	loading,
 	onChange,
 	placeholder,
+	disabled,
 	type = "text",
 }: FormInputFieldPropsI<T>) => {
 	// State for controlling password visibility (text or password type)
@@ -59,6 +60,7 @@ const FormInputField = <T extends FieldValues>({
 								onChange={(e) => onChangeHandler(e, field)} // onChange is handled by the custom hook
 								placeholder={placeholder || `Enter your ${label.toLowerCase()}`}
 								className={cn(form.formState.errors[name] && "input-error")}
+								disabled={disabled}
 							/>
 
 							{/* Password visibility toggle */}
