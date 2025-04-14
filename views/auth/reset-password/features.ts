@@ -31,11 +31,16 @@ const useResetPasswordPageViewFeatures = () => {
 		values: z.infer<typeof resetPasswordFormSchema>,
 	) => {
 		try {
-			const identifier = localStorage.getItem("identifier") as string;
-
+			let identifier: string | null = null;
+			if (typeof window !== "undefined") {
+				identifier = localStorage.getItem("identifier");
+			}
 			if (!identifier) {
-				localStorage.removeItem("identifier");
+				if (typeof window !== "undefined") {
+					localStorage.removeItem("identifier");
+				}
 				router.push("/auth/forgot-password");
+				return;
 			}
 
 			const { success, message } = await resetPassword({
@@ -50,7 +55,9 @@ const useResetPasswordPageViewFeatures = () => {
 				reset();
 			}
 
-			localStorage.removeItem("identifier");
+			if (typeof window !== "undefined") {
+				localStorage.removeItem("identifier");
+			}
 		} catch (error) {
 			if (error instanceof AxiosError) {
 				const errorMessage = error.response?.data?.message;

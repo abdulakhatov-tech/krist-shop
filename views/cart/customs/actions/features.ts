@@ -41,6 +41,10 @@ const useCartTableActionFeatures = () => {
 
 	const handleRemoseCouponInfo = () => {
 		dispatch(clearCoupon());
+
+		localStorage.removeItem("coupon-code");
+		localStorage.removeItem("coupon-discount");
+		localStorage.removeItem("coupon-total");
 	};
 
 	return {

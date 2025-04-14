@@ -26,9 +26,11 @@ const couponCodeSlice = createSlice({
 			state.discount = 0;
 			state.total = 0;
 
-			localStorage.removeItem("coupon-code");
-			localStorage.removeItem("coupon-discount");
-			localStorage.removeItem("coupon-total");
+			if (typeof window !== "undefined") {
+				localStorage.removeItem("coupon-code");
+				localStorage.removeItem("coupon-discount");
+				localStorage.removeItem("coupon-total");
+			}
 		},
 	},
 });
