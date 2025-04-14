@@ -7,7 +7,7 @@ import {
 } from "@/hooks/useQueryActions/useCart";
 import { useAppDispatch } from "@/hooks/useRedux";
 import type { IUser } from "@/interfaces/user.interface";
-import { clearCoupon } from "@/redux/slices/coupon";
+import { clearCoupon, setCoupon } from "@/redux/slices/coupon";
 import { useEffect, useState } from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
@@ -21,7 +21,14 @@ const useCartTableActionFeatures = () => {
 	useEffect(() => {
 		// Set isClient to true after the component is mounted in the client
 		setIsClient(true);
-	}, []);
+		dispatch(
+			setCoupon({
+				code: localStorage.getItem("coupon-code") || "",
+				discount: Number(localStorage.getItem("coupon-discount")) || 0,
+				total: Number(localStorage.getItem("coupon-total")) || 0,
+			}),
+		);
+	}, [dispatch]);
 
 	const { mutateAsync: incrementQuantity } = useIncrementCartItemQuantity();
 	const { mutateAsync: decrementQuantity } = useDecrementCartItemQuantity();
