@@ -6,13 +6,22 @@ import { Form } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/tools";
 import { Check } from "lucide-react";
+import { useEffect, useState } from "react";
 import useCouponFeatures from "./features";
 
 const Coupon = () => {
 	const { form, hasErrors, handleFormSubmit, isCartLoading } =
 		useCouponFeatures();
 	const { isSubmitting } = form.formState;
-	const isCouponAvailable = !!localStorage.getItem("coupon-discount");
+
+	// Track coupon availability in local state to ensure reactivity
+	const [isCouponAvailable, setIsCouponAvailable] = useState(false);
+
+	// Check if the coupon is already applied from localStorage
+	useEffect(() => {
+		const couponDiscount = localStorage.getItem("coupon-discount");
+		setIsCouponAvailable(Boolean(couponDiscount));
+	}, []);
 
 	return (
 		<Form {...form}>
@@ -34,9 +43,8 @@ const Coupon = () => {
 					disabled={isSubmitting || isCartLoading || isCouponAvailable}
 					className={cn(hasErrors && "button-error", "bg-[#DB4444]")}
 				>
-					{isSubmitting ? <LoadingSpinner /> : ""}{" "}
 					{isSubmitting ? (
-						"Applying Coupon..."
+						<LoadingSpinner />
 					) : isCouponAvailable ? (
 						<>
 							<Check /> Applied Coupon
@@ -44,7 +52,6 @@ const Coupon = () => {
 					) : (
 						"Apply Coupon"
 					)}
-					{}
 				</Button>
 			</form>
 		</Form>
