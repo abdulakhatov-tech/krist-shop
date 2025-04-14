@@ -1,3 +1,5 @@
+"use client";
+
 import { isAxiosError } from "axios";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useForm } from "react-hook-form";
@@ -11,6 +13,7 @@ import { setCoupon } from "@/redux/slices/coupon";
 import { couponFormSchema } from "@/schemas/coupon";
 import { useCouponService } from "@/services/coupon";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 
 const useCouponFeatures = () => {
 	const dispatch = useAppDispatch();
@@ -30,6 +33,14 @@ const useCouponFeatures = () => {
 			code: "",
 		},
 	});
+
+	// State to track if the code is running on the client
+	const [isClient, setIsClient] = useState(false);
+
+	// Set isClient to true once the component is mounted on the client
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
 
 	const { reset, formState } = form;
 	const hasErrors = Object.keys(formState.errors).length > 0;
@@ -52,9 +63,14 @@ const useCouponFeatures = () => {
 					}),
 				);
 
-				localStorage.setItem("coupon-code", response?.coupon);
-				localStorage.setItem("coupon-discount", response?.discount?.toString());
-				localStorage.setItem("coupon-total", response?.total.toString());
+				if (isClient) {
+					localStorage.setItem("coupon-code", response?.coupon);
+					localStorage.setItem(
+						"coupon-discount",
+						response?.discount?.toString(),
+					);
+					localStorage.setItem("coupon-total", response?.total.toString());
+				}
 			}
 
 			reset();
