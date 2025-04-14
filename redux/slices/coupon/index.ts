@@ -8,7 +8,7 @@ interface IInitialState {
 
 const initialState: IInitialState = {
 	code: "",
-	discount: 0,
+	discount: Number(localStorage.getItem("coupon-discount")) || 0,
 	total: 0,
 };
 

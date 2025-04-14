@@ -3,6 +3,7 @@
 import { FormInput } from "@/components/form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { useAppSelector } from "@/hooks/useRedux";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/tools";
 import { Check } from "lucide-react";
@@ -14,14 +15,16 @@ const Coupon = () => {
 		useCouponFeatures();
 	const { isSubmitting } = form.formState;
 
+	const { discount } = useAppSelector((state) => state.couponCodeSlice);
+
 	// Track coupon availability in local state to ensure reactivity
 	const [isCouponAvailable, setIsCouponAvailable] = useState(false);
 
 	// Check if the coupon is already applied from localStorage
 	useEffect(() => {
-		const couponDiscount = localStorage.getItem("coupon-discount");
+		const couponDiscount = discount || localStorage.getItem("coupon-discount");
 		setIsCouponAvailable(Boolean(couponDiscount));
-	}, []);
+	}, [discount]);
 
 	return (
 		<Form {...form}>
