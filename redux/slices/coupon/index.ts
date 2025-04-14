@@ -8,7 +8,7 @@ interface IInitialState {
 
 const initialState: IInitialState = {
 	code: "",
-	discount: Number(localStorage.getItem("coupon-discount")) || 0,
+	discount: 0,
 	total: 0,
 };
 
@@ -25,12 +25,6 @@ const couponCodeSlice = createSlice({
 			state.code = "";
 			state.discount = 0;
 			state.total = 0;
-
-			if (typeof window !== "undefined") {
-				localStorage.removeItem("coupon-code");
-				localStorage.removeItem("coupon-discount");
-				localStorage.removeItem("coupon-total");
-			}
 		},
 	},
 });
