@@ -18,7 +18,10 @@ const couponCodeSlice = createSlice({
 	name: "couponCode",
 	initialState,
 	reducers: {
-		setCoupon: (state, action: PayloadAction<IInitialState>) => {
+		setCoupon: (
+			state,
+			action: PayloadAction<{ code: string; discount: number; total: number }>,
+		) => {
 			state.code = action.payload.code;
 			state.discount = action.payload.discount;
 			state.total = action.payload.total;
