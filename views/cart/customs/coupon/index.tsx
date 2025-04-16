@@ -8,7 +8,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/tools";
 import { Check } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useCouponFeatures from "./features";
 
 const Coupon = () => {
@@ -17,14 +17,14 @@ const Coupon = () => {
 		useCouponFeatures();
 	const { isSubmitting } = form.formState;
 
-	useEffect(() => {
-		if (typeof window === "undefined") {
-			return;
-		}
-	}, []);
+	const [isDiscountAvailable, setIsDiscountAvailable] = useState(false);
 
-	const isDiscountAvailable =
-		!!discount || !!localStorage.getItem("coupon-discount");
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const localDiscount = localStorage.getItem("coupon-discount");
+			setIsDiscountAvailable(!!discount || !!localDiscount);
+		}
+	}, [discount]);
 
 	return (
 		<Card className="rounded-md">
