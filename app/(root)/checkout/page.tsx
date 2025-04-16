@@ -1,3 +1,5 @@
+"use client";
+
 import CheckoutPageView from "@/views/checkout";
 
 const Checkout = () => {
