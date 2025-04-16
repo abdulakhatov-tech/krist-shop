@@ -15,7 +15,7 @@ import { WrapperCard } from "./customs";
 import useCheckoutFeatures from "./features";
 
 const CheckoutPageView = () => {
-	const { form, hasErrors, handleFormSubmit } = useCheckoutFeatures();
+	const { form, hasErrors, handleFormSubmit, loading } = useCheckoutFeatures();
 	const { isSubmitting } = form.formState;
 
 	return (
@@ -35,23 +35,39 @@ const CheckoutPageView = () => {
 						>
 							<WrapperCard
 								title="Information *"
-								className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+								className="grid sm:grid-cols-2 gap-4"
 							>
 								{/* First Name Field */}
-								<FormInput form={form} name="firstName" label="First Name" />
+								<FormInput
+									form={form}
+									name="firstName"
+									label="First Name"
+									loading={loading}
+								/>
 
 								{/* Last Name Field */}
-								<FormInput form={form} name="lastName" label="Last Name" />
+								<FormInput
+									form={form}
+									name="lastName"
+									label="Last Name"
+									loading={loading}
+								/>
 
 								{/* Phone Number Field */}
 								<FormInput
 									form={form}
 									name="phoneNumber"
 									label="Phone Number"
+									loading={loading}
 								/>
 
 								{/* Email Field */}
-								<FormInput form={form} name="email" label="Email" />
+								<FormInput
+									form={form}
+									name="email"
+									label="Email"
+									loading={loading}
+								/>
 							</WrapperCard>
 
 							<WrapperCard
@@ -67,7 +83,7 @@ const CheckoutPageView = () => {
 
 							<WrapperCard
 								title="Address *"
-								className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+								className="grid sm:grid-cols-2 gap-4"
 							>
 								{/* Region Field */}
 								<FormInput
@@ -75,6 +91,7 @@ const CheckoutPageView = () => {
 									name="region"
 									label="Region"
 									placeholder="Enter your region (e.g., Tashkent, Jizzakh)"
+									loading={loading}
 								/>
 
 								{/* District Field */}
@@ -83,6 +100,7 @@ const CheckoutPageView = () => {
 									name="district"
 									label="District"
 									placeholder="Enter your district (e.g., Chilonzor, Zafarobod)"
+									loading={loading}
 								/>
 								{/* Extra Address Field */}
 								<FormInput
@@ -90,6 +108,7 @@ const CheckoutPageView = () => {
 									name="extraAddress"
 									label="Extra Address"
 									placeholder="Apartment, floor, landmark, etc."
+									loading={loading}
 								/>
 							</WrapperCard>
 
@@ -112,7 +131,7 @@ const CheckoutPageView = () => {
 							{/* Button */}
 							<Button
 								type="submit"
-								disabled={isSubmitting}
+								disabled={isSubmitting || loading}
 								className={cn(hasErrors && "button-error", "mt-4 bg-[#DB4444]")}
 							>
 								{isSubmitting ? <LoadingSpinner /> : ""}{" "}

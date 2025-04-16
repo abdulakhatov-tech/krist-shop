@@ -16,7 +16,8 @@ const Coupon = () => {
 		useCouponFeatures();
 	const { isSubmitting } = form.formState;
 
-	const isDiscountAvailable = !!discount;
+	const isDiscountAvailable =
+		!!discount || !!localStorage.getItem("coupon-discount");
 
 	return (
 		<Card className="rounded-md">

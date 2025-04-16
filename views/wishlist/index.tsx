@@ -3,7 +3,6 @@
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 import { ProductCard } from "@/components/generics";
-import { Button } from "@/components/ui/button";
 import {
 	Carousel,
 	CarouselContent,

@@ -1,10 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 import { toast } from "sonner";
 
 import type { IUser } from "@/interfaces/user.interface";
 import type { addUserFormSchema, editUserFormSchema } from "@/schemas/user";
 import {
 	type FetchUsersParams,
+	type IUserOrderInfoBody,
 	useUsersService,
 } from "@/services/users/users.service";
 import { handleApiError } from "@/utils/helper-fns/errors";
@@ -98,6 +100,34 @@ export const useEditUser = (userId: string) => {
 			toast.success("User edited successfully!");
 			queryClient.invalidateQueries({ queryKey: ["users"] });
 			queryClient.invalidateQueries({ queryKey: ["users", userId] });
+		},
+		onError: handleApiError,
+	});
+};
+
+export const useEditUserOrderInfo = (userId: string) => {
+	const queryClient = useQueryClient();
+	const { editUserOrderInfo } = useUsersService();
+
+	return useMutation({
+		mutationFn: (data: IUserOrderInfoBody) => editUserOrderInfo(userId, data),
+		onSuccess: (data: IUser) => {
+			toast.success("User Order Info edited successfully!");
+
+			queryClient.invalidateQueries({ queryKey: ["users"] });
+			queryClient.invalidateQueries({ queryKey: ["users", data?.id] });
+
+			const existingCookie = Cookies.get("_auth_state");
+			if (existingCookie) {
+				const parsed = JSON.parse(existingCookie);
+
+				const updated = {
+					...parsed,
+					...data,
+				};
+
+				Cookies.set("_auth_state", JSON.stringify(updated), {});
+			}
 		},
 		onError: handleApiError,
 	});
