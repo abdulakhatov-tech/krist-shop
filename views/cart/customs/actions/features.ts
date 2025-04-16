@@ -21,13 +21,15 @@ const useCartTableActionFeatures = () => {
 	useEffect(() => {
 		// Set isClient to true after the component is mounted in the client
 		setIsClient(true);
-		dispatch(
-			setCoupon({
-				code: localStorage.getItem("coupon-code") || "",
-				discount: Number(localStorage.getItem("coupon-discount")) || 0,
-				total: Number(localStorage.getItem("coupon-total")) || 0,
-			}),
-		);
+		if (typeof window !== "undefined") {
+			dispatch(
+				setCoupon({
+					code: localStorage.getItem("coupon-code") || "",
+					discount: Number(localStorage.getItem("coupon-discount")) || 0,
+					total: Number(localStorage.getItem("coupon-total")) || 0,
+				}),
+			);
+		}
 	}, [dispatch]);
 
 	const { mutateAsync: incrementQuantity } = useIncrementCartItemQuantity();
@@ -58,7 +60,7 @@ const useCartTableActionFeatures = () => {
 	const handleRemoseCouponInfo = () => {
 		dispatch(clearCoupon());
 
-		if (isClient) {
+		if (isClient && typeof window !== "undefined") {
 			localStorage.removeItem("coupon-code");
 			localStorage.removeItem("coupon-discount");
 			localStorage.removeItem("coupon-total");

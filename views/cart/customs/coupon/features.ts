@@ -63,7 +63,7 @@ const useCouponFeatures = () => {
 					}),
 				);
 
-				if (isClient) {
+				if (isClient && typeof window !== "undefined") {
 					localStorage.setItem("coupon-code", response?.coupon);
 					localStorage.setItem(
 						"coupon-discount",

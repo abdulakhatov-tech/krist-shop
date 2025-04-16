@@ -8,6 +8,7 @@ import { useAppSelector } from "@/hooks/useRedux";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/tools";
 import { Check } from "lucide-react";
+import { useEffect } from "react";
 import useCouponFeatures from "./features";
 
 const Coupon = () => {
@@ -15,6 +16,12 @@ const Coupon = () => {
 	const { form, hasErrors, handleFormSubmit, isCartLoading } =
 		useCouponFeatures();
 	const { isSubmitting } = form.formState;
+
+	useEffect(() => {
+		if (typeof window === "undefined") {
+			return;
+		}
+	}, []);
 
 	const isDiscountAvailable =
 		!!discount || !!localStorage.getItem("coupon-discount");
