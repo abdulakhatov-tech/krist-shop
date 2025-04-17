@@ -8,3 +8,8 @@ export const checkoutPageLinks = [
 	{ id: "2", title: "Cart", path: "/cart" },
 	{ id: "3", title: "Checkout", isActive: true },
 ];
+
+export const productDetailPageLinks = [
+	{ id: "1", title: "Shop", path: "/shop" },
+	{ id: "2", title: "Product", isActive: true },
+];

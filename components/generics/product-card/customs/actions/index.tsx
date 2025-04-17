@@ -94,7 +94,7 @@ const ActionButtons: FC<{
 					<LoadingSpinner />
 				) : isProductInWishlist ? (
 					<CustomTooltip title="Remove Product from Wishlist">
-						<Heart className="text-red-600 fill-red-600" />
+						<Heart className="text-[#DB4444] fill-[#DB4444]" />
 					</CustomTooltip>
 				) : (
 					<CustomTooltip title="Add Product to Wishlist">
