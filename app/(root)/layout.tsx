@@ -1,3 +1,4 @@
+import { CheckoutSuccessModal } from "@/common/modals";
 import { RootFooter, RootNavbar } from "@/layouts";
 import { SuspenseLoading } from "@/tools";
 import type { Metadata } from "next";
@@ -31,6 +32,8 @@ const RootLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 				<SuspenseLoading mode="dashboard">{children}</SuspenseLoading>
 			</main>
 			<RootFooter />
+
+			<CheckoutSuccessModal />
 		</>
 	);
 };

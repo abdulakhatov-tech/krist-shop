@@ -101,3 +101,23 @@ export const useGetCart = (userId: string) => {
 		retry: 2,
 	});
 };
+
+export const useClearCart = () => {
+	const queryClient = useQueryClient();
+	const { clearCart } = useCartService();
+
+	return useMutation({
+		mutationFn: clearCart,
+		onSuccess: () => {
+			toast.success("Cart is cleared!");
+			queryClient.invalidateQueries({ queryKey: ["cart"] });
+		},
+		onError: (error) => {
+			if (isAxiosError(error)) {
+				toast.error(error?.response?.data?.message);
+			} else {
+				toast.error(error?.message || "Failed to clear Cart.");
+			}
+		},
+	});
+};

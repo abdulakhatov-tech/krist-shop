@@ -66,6 +66,7 @@ const useCartSummaryFeatures = () => {
 		shipping,
 		isCartLoading,
 		handleProceedToCheckout,
+		cart,
 	};
 };
 

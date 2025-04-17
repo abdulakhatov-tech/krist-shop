@@ -83,7 +83,7 @@ const useCouponFeatures = () => {
 		}
 	};
 
-	return { form, hasErrors, handleFormSubmit, isCartLoading };
+	return { form, hasErrors, handleFormSubmit, isCartLoading, cart };
 };
 
 export default useCouponFeatures;

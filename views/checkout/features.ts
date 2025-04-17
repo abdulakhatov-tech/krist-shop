@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
 
-import { useGetCart } from "@/hooks/useQueryActions/useCart";
+import { useClearCart, useGetCart } from "@/hooks/useQueryActions/useCart";
 import { useCreateOrder } from "@/hooks/useQueryActions/useOrders";
 import { useEditUserOrderInfo } from "@/hooks/useQueryActions/useUsers";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRedux";
@@ -15,6 +15,7 @@ import type { ICart } from "@/interfaces/cart.interface";
 import type { IUser } from "@/interfaces/user.interface";
 import { setShipping } from "@/redux/slices/coupon";
 import { checkoutFormSchema } from "@/schemas/checkout";
+import { useAxios } from "@/services/api/axios.service";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const DELIVERY_COSTS = {
@@ -24,11 +25,13 @@ const DELIVERY_COSTS = {
 } as const;
 
 const useCheckoutFeatures = () => {
+	const $axios = useAxios();
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 	const user = useAuthUser() as IUser;
 	const [loading, setLoading] = useState(false);
 
+	const { mutateAsync: clearCart } = useClearCart();
 	const { mutateAsync: createOrder } = useCreateOrder();
 	const { mutateAsync: editUserOrderInfo } = useEditUserOrderInfo(user?.id);
 	const { data: cartData, isLoading: cartDataLoading } = useGetCart(user?.id);
@@ -59,6 +62,11 @@ const useCheckoutFeatures = () => {
 	) => {
 		try {
 			if (cartDataLoading) return;
+
+			if (!cartData) {
+				toast.error("No products in cart.");
+				return;
+			}
 
 			const shipping =
 				values.delivery === "pickup"
@@ -95,15 +103,43 @@ const useCheckoutFeatures = () => {
 
 				await editUserOrderInfo(orderInfoBody);
 
-				if (!cartData) {
-					toast.error("No products in cart.");
-					return;
-				}
 				await createOrder(body);
 				reset();
+				await clearCart(user.id);
+				localStorage.removeItem("coupon-code");
+				localStorage.removeItem("coupon-discount");
+				localStorage.removeItem("coupon-total");
 				router.push("/");
 			} else {
-				toast.success("Redirecting to Payme | Click...");
+				const orderPayload = {
+					userId: user?.id,
+					products: cartData.map((item: ICart) => ({
+						productId: item.product.id,
+						quantity: item.quantity,
+						price: Number(item.product.currentPrice),
+						name: item.product.name,
+						imageUrl: item.product.imageUrl,
+					})),
+					coupon: discount,
+					shipping,
+				};
+
+				try {
+					const response = await $axios.post("/payment/checkout", orderPayload);
+
+					if (response.data?.url) {
+						await clearCart(user.id);
+						localStorage.removeItem("coupon-code");
+						localStorage.removeItem("coupon-discount");
+						localStorage.removeItem("coupon-total");
+						window.location.href = response.data.url; // Redirect to Stripe Checkout
+					} else {
+						toast.error("Failed to redirect to payment.");
+					}
+				} catch (err) {
+					console.error(err);
+					toast.error("Failed to initiate payment.");
+				}
 			}
 		} catch (error) {
 			toast.error("An error occurred during checkout.");

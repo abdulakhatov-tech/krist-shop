@@ -25,6 +25,7 @@ const CartSummary: React.FC<PropsI> = ({ isProceedToCheckout = true }) => {
 		subtotal,
 		isCartLoading,
 		handleProceedToCheckout,
+		cart,
 	} = useCartSummaryFeatures();
 
 	const isDiscountAvailable = !!discount;
@@ -60,7 +61,7 @@ const CartSummary: React.FC<PropsI> = ({ isProceedToCheckout = true }) => {
 
 				{isProceedToCheckout && (
 					<Button
-						disabled={isCartLoading}
+						disabled={isCartLoading || !cart?.length}
 						className="w-full bg-[#DB4444]"
 						onClick={handleProceedToCheckout}
 					>

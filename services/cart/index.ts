@@ -70,6 +70,18 @@ const createCartService = ($axios: AxiosInstance) => ({
 			throw new Error("Failed to fetch cart.");
 		}
 	},
+
+	async clearCart(userId: string): Promise<[]> {
+		try {
+			const { data } = await $axios.delete(`/cart/${userId}`);
+			return data?.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to clear cart.");
+		}
+	},
 });
 
 export const useCartService = () => {

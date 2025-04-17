@@ -13,7 +13,7 @@ import useCouponFeatures from "./features";
 
 const Coupon = () => {
 	const { discount } = useAppSelector((state) => state.couponCodeSlice);
-	const { form, hasErrors, handleFormSubmit, isCartLoading } =
+	const { form, hasErrors, handleFormSubmit, isCartLoading, cart } =
 		useCouponFeatures();
 	const { isSubmitting } = form.formState;
 
@@ -45,7 +45,12 @@ const Coupon = () => {
 						{/* Button */}
 						<Button
 							type="submit"
-							disabled={isSubmitting || isCartLoading || isDiscountAvailable}
+							disabled={
+								isSubmitting ||
+								isCartLoading ||
+								isDiscountAvailable ||
+								!cart?.length
+							}
 							className={cn(hasErrors && "button-error", "bg-[#DB4444] w-full")}
 						>
 							{isSubmitting ? (
