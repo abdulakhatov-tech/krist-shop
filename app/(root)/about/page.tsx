@@ -1,4 +1,3 @@
-import { Award, CircleDollarSign, DollarSign, Store } from "lucide-react";
 import Image from "next/image";
 
 import GenericBreadcrumb from "@/components/generics/breadcrumb";
