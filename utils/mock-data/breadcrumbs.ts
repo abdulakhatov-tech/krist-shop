@@ -18,3 +18,8 @@ export const contactPageLinks = [
 	{ id: "1", title: "Home", path: "/" },
 	{ id: "2", title: "Contact", isActive: true },
 ];
+
+export const aboutPageLinks = [
+	{ id: "1", title: "Home", path: "/" },
+	{ id: "2", title: "About", isActive: true },
+];
