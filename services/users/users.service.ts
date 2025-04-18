@@ -33,7 +33,7 @@ export interface IUserProfileInfoBody {
 	region: string;
 	district: string;
 	extraAddress: string;
-	profilePhoto: string;
+	profilePhoto?: string;
 	password?: string;
 	newPassword?: string;
 }
