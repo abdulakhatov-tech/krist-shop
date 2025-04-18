@@ -18,7 +18,6 @@ import {
 	Heart,
 	LayoutDashboard,
 	LogOut,
-	Settings,
 	ShoppingCart,
 	User,
 } from "lucide-react";
@@ -46,13 +45,7 @@ export const userAvatarItems = [
 	{
 		name: "Favorites",
 		icon: Heart,
-		link: "/favorites",
-		allowedRoles: ["admin", "seller", "customer"],
-	},
-	{
-		name: "Settings",
-		icon: Settings,
-		link: "/settings",
+		link: "/wishlist",
 		allowedRoles: ["admin", "seller", "customer"],
 	},
 	{

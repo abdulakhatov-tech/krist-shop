@@ -23,3 +23,8 @@ export const aboutPageLinks = [
 	{ id: "1", title: "Home", path: "/" },
 	{ id: "2", title: "About", isActive: true },
 ];
+
+export const profilePageLinks = [
+	{ id: "1", title: "Home", path: "/" },
+	{ id: "2", title: "My Profile", isActive: true },
+];

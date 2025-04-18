@@ -3,10 +3,12 @@ import Cookies from "js-cookie";
 import { toast } from "sonner";
 
 import type { IUser } from "@/interfaces/user.interface";
+import { profileFormSchema } from "@/schemas/profile";
 import type { addUserFormSchema, editUserFormSchema } from "@/schemas/user";
 import {
 	type FetchUsersParams,
 	type IUserOrderInfoBody,
+	type IUserProfileInfoBody,
 	useUsersService,
 } from "@/services/users/users.service";
 import { handleApiError } from "@/utils/helper-fns/errors";
@@ -128,6 +130,22 @@ export const useEditUserOrderInfo = (userId: string) => {
 
 				Cookies.set("_auth_state", JSON.stringify(updated), {});
 			}
+		},
+		onError: handleApiError,
+	});
+};
+
+export const useEditUserProfile = (userId: string) => {
+	const queryClient = useQueryClient();
+	const { editUserProfile } = useUsersService();
+
+	return useMutation({
+		mutationFn: (data: IUserProfileInfoBody) => editUserProfile(userId, data),
+		onSuccess: (data: IUser) => {
+			toast.success("User Profile Info edited successfully!");
+
+			queryClient.invalidateQueries({ queryKey: ["users"] });
+			queryClient.invalidateQueries({ queryKey: ["users", data?.id] });
 		},
 		onError: handleApiError,
 	});

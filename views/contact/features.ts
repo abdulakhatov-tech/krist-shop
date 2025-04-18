@@ -21,7 +21,7 @@ const useContactFeatures = () => {
 		},
 	});
 
-	const { reset, formState, setError } = form;
+	const { reset, formState } = form;
 	const hasErrors = Object.keys(formState.errors).length > 0;
 
 	const handleFormSubmit = async (

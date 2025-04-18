@@ -80,7 +80,7 @@ const ContactPageView = () => {
 									className={cn(hasErrors && "button-error", "mt-4")}
 								>
 									{isSubmitting ? <LoadingSpinner /> : ""}{" "}
-									{isSubmitting ? "Signing In..." : "Sign In"}
+									{isSubmitting ? "Sending Message..." : "Send Message"}
 								</Button>
 							</form>
 						</Form>

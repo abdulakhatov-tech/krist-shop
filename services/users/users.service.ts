@@ -25,6 +25,19 @@ export interface IUserOrderInfoBody {
 	extraAddress: string;
 }
 
+export interface IUserProfileInfoBody {
+	firstName: string;
+	lastName: string;
+	email: string;
+	phoneNumber: string;
+	region: string;
+	district: string;
+	extraAddress: string;
+	profilePhoto: string;
+	password?: string;
+	newPassword?: string;
+}
+
 const createUsersService = ($axios: AxiosInstance) => ({
 	async fetchUsers(params: FetchUsersParams): Promise<ResponseType<IUser[]>> {
 		try {
@@ -114,6 +127,24 @@ const createUsersService = ($axios: AxiosInstance) => ({
 				throw new Error(error?.response?.data?.message);
 			}
 			throw new Error("Failed to edit user order info.");
+		}
+	},
+
+	async editUserProfile(
+		userId: string,
+		body: IUserProfileInfoBody,
+	): Promise<IUser> {
+		try {
+			const { data } = await $axios.patch(
+				`/users/${userId}/profile-info`,
+				body,
+			);
+			return data.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to edit user profile info.");
 		}
 	},
 });
