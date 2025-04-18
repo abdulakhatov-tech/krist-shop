@@ -13,3 +13,8 @@ export const productDetailPageLinks = [
 	{ id: "1", title: "Shop", path: "/shop" },
 	{ id: "2", title: "Product", isActive: true },
 ];
+
+export const contactPageLinks = [
+	{ id: "1", title: "Home", path: "/" },
+	{ id: "2", title: "Contact", isActive: true },
+];
