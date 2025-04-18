@@ -18,7 +18,7 @@ const ProfileLayout: React.FC<{ children: React.ReactNode }> = ({
 			<GenericBreadcrumb links={profilePageLinks} />
 
 			<div className="grid md:grid-cols-[200px_1fr] lg:grid-cols-[250px_1fr] gap-4 md:gap-8 pb-15">
-				<aside className="bg-accent p-4">
+				<aside className="bg-accent p-3">
 					<nav>
 						<ul className="flex flex-wrap md:flex-nowrap flex-row md:flex-col gap-3">
 							{profileSidebarData?.map(({ id, title, path }) => (

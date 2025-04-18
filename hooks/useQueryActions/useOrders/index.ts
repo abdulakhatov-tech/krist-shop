@@ -1,5 +1,5 @@
 import { useOrdersService } from "@/services/orders";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
 
@@ -20,5 +20,16 @@ export const useCreateOrder = () => {
 				toast.error(error?.message || "Failed to create order.");
 			}
 		},
+	});
+};
+
+export const useGetUserOrders = (userId: string) => {
+	const { getUserOrders } = useOrdersService();
+
+	return useQuery({
+		queryKey: ["orders"],
+		queryFn: () => getUserOrders(userId),
+		staleTime: 1000 * 60 * 5,
+		retry: 2,
 	});
 };

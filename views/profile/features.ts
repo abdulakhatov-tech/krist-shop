@@ -79,7 +79,7 @@ const useProfileFeatures = () => {
 		await editUserInfo(payload);
 	};
 
-	return { form, hasErrors, handleFormSubmit };
+	return { form, hasErrors, handleFormSubmit, isLoading };
 };
 
 export default useProfileFeatures;

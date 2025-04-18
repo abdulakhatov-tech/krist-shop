@@ -8,7 +8,7 @@ import { LoadingSpinner } from "@/tools";
 import useProfileFeatures from "./features";
 
 const ProfilePageView = () => {
-	const { form, hasErrors, handleFormSubmit } = useProfileFeatures();
+	const { form, hasErrors, handleFormSubmit, isLoading } = useProfileFeatures();
 	const { isSubmitting, isDirty } = form.formState;
 
 	return (
@@ -21,17 +21,53 @@ const ProfilePageView = () => {
 					<h3 className="text-lg font-medium leadin-7">Edit Your Profile</h3>
 
 					<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-						<FormInput form={form} name="firstName" label="First Name" />
-						<FormInput form={form} name="lastName" label="Last Name" />
-						<FormInput form={form} name="email" label="Email" />
-						<FormInput form={form} name="phoneNumber" label="Phone Number" />
-						<FormInput form={form} name="region" label="Region" />
-						<FormInput form={form} name="district" label="District" />
-						<FormInput form={form} name="extraAddress" label="Extra Address" />
+						<FormInput
+							form={form}
+							name="firstName"
+							label="First Name"
+							loading={isLoading}
+						/>
+						<FormInput
+							form={form}
+							name="lastName"
+							label="Last Name"
+							loading={isLoading}
+						/>
+						<FormInput
+							form={form}
+							name="email"
+							label="Email"
+							loading={isLoading}
+						/>
+						<FormInput
+							form={form}
+							name="phoneNumber"
+							label="Phone Number"
+							loading={isLoading}
+						/>
+						<FormInput
+							form={form}
+							name="region"
+							label="Region"
+							loading={isLoading}
+						/>
+						<FormInput
+							form={form}
+							name="district"
+							label="District"
+							loading={isLoading}
+						/>
+						<FormInput
+							form={form}
+							name="extraAddress"
+							label="Extra Address"
+							loading={isLoading}
+						/>
 						<FormUploadImage
 							form={form}
 							name="profilePhoto"
 							label="Profile Photo"
+							loading={isLoading}
 						/>
 					</div>
 

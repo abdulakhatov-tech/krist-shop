@@ -26,6 +26,18 @@ const createOrdersService = ($axios: AxiosInstance) => ({
 			throw new Error("Failed to create order.");
 		}
 	},
+
+	async getUserOrders(userId: string): Promise<IOrder[]> {
+		try {
+			const { data } = await $axios.get(`/orders/user/${userId}`);
+			return data?.data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to get user orders!");
+		}
+	},
 });
 
 export const useOrdersService = () => {

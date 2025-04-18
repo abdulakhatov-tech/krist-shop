@@ -21,7 +21,7 @@ export interface IOrder {
 	shipping: number;
 	coupon: number;
 	price: number;
-	status: "pending" | "confirmed" | "shipped" | "delivered" | "cancelled";
+	status: "pending" | "processing" | "delivered" | "canceled";
 	createdAt: string; // ISO Date string
 	updatedAt: string; // ISO Date string
 }
