@@ -1,7 +1,14 @@
+"use client";
+
+import { SuspenseLoading } from "@/tools";
 import VerifyOtpPageView from "@/views/auth/verify-otp";
 
 const VerifyOtp = () => {
-	return <VerifyOtpPageView />;
+	return (
+		<SuspenseLoading mode="website">
+			<VerifyOtpPageView />
+		</SuspenseLoading>
+	);
 };
 
 export default VerifyOtp;

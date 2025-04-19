@@ -1,3 +1,5 @@
+"use client";
+
 import { SuspenseLoading } from "@/tools";
 import ResetPasswordPageView from "@/views/auth/reset-password";
 

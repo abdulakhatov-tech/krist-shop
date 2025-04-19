@@ -1,3 +1,5 @@
+"use client";
+
 import { SuspenseLoading } from "@/tools";
 import ForgotPasswordPageView from "@/views/auth/forgot-password";
 
