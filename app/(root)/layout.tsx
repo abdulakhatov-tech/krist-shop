@@ -28,9 +28,7 @@ const RootLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
 		<>
 			<RootNavbar />
-			<main className="min-h-[60vh]">
-				<SuspenseLoading mode="dashboard">{children}</SuspenseLoading>
-			</main>
+			<main className="min-h-[60vh]">{children}</main>
 			<RootFooter />
 
 			<CheckoutSuccessModal />
