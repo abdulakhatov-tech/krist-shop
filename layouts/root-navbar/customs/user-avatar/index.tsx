@@ -1,10 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import type React from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { IUser } from "@/interfaces/user.interface";
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -13,50 +11,12 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import SignOut from "@/layouts/sign-out";
-import {
-	Heart,
-	LayoutDashboard,
-	LogOut,
-	ShoppingCart,
-	User,
-} from "lucide-react";
+import type { IUser } from "@/interfaces/user.interface";
+import { userAvatarItems } from "@/utils/mock-data/navbar-mock";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import "./style.css";
 
-export const userAvatarItems = [
-	{
-		name: "Dashboard",
-		icon: LayoutDashboard,
-		link: "/dashboard",
-		allowedRoles: ["admin", "seller"],
-	},
-	{
-		name: "Profile",
-		icon: User,
-		link: "/profile",
-		allowedRoles: ["admin", "seller", "customer"],
-	},
-	{
-		name: "Shopping Cart",
-		icon: ShoppingCart,
-		link: "/cart",
-		allowedRoles: ["admin", "seller", "customer"],
-	},
-	{
-		name: "Favorites",
-		icon: Heart,
-		link: "/wishlist",
-		allowedRoles: ["admin", "seller", "customer"],
-	},
-	{
-		name: "Logout",
-		icon: LogOut,
-		link: "/logout",
-		allowedRoles: ["admin", "seller", "customer"],
-	},
-];
-
-const UserAvatar: React.FC = () => {
+const UserAvatar = () => {
 	const user = useAuthUser<IUser | null>();
 
 	return (
@@ -72,20 +32,20 @@ const UserAvatar: React.FC = () => {
 			<DropdownMenuContent>
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				{userAvatarItems.map((item) => {
+				{userAvatarItems?.map((item) => {
 					if (item.name === "Logout") {
 						return (
-							<SignOut key={item.name}>
-								<DropdownMenuItem
-									key={item.name}
-									className="sign-out hover:text-white hover:bg-[#dc143ce1] text-[15px]"
-								>
+							<DropdownMenuItem
+								key={item.name}
+								className="sign-out hover:text-white hover:bg-[#dc143ce1] text-[15px]"
+							>
+								<Link href="?auth=sign-out" className="flex items-center gap-2">
 									{item.icon && (
 										<item.icon className="mr-[2px] !w-5 !h-5 sign-out-icon" />
 									)}
 									{item.name}
-								</DropdownMenuItem>
-							</SignOut>
+								</Link>
+							</DropdownMenuItem>
 						);
 					}
 

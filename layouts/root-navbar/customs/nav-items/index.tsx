@@ -28,7 +28,7 @@ const NavItems: React.FC<PropsType> = ({ direction = "horizontal" }) => {
 						className={`${
 							pathname === path
 								? "font-semibold border-b border-b-black"
-								: "font-normal"
+								: "font-normal hover:font-medium hover:border-b hover:border-b-black"
 						} text-lg flex items-center gap-1`}
 					>
 						{title}

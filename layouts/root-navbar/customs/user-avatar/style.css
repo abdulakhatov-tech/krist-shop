@@ -1,3 +1,7 @@
 .sign-out:hover .sign-out-icon {
 	color: white;
 }
+
+.sign-out:active .sign-out-icon {
+	color: black;
+}

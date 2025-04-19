@@ -1,17 +1,16 @@
 "use client";
 
-import type React from "react";
-
-import { CustomTooltip, LoadingSpinner } from "@/tools";
 import { Heart, Search, ShoppingBasket } from "lucide-react";
+import Link from "next/link";
+import type React from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-import useNavActionsFeatures from "./features";
 
 import { Badge } from "@/components/ui/badge";
 import { useGetCart } from "@/hooks/useQueryActions/useCart";
 import { useGetWishlist } from "@/hooks/useQueryActions/useWishlist";
 import type { IUser } from "@/interfaces/user.interface";
-import Link from "next/link";
+import { CustomTooltip, LoadingSpinner } from "@/tools";
+import useNavActionsFeatures from "./features";
 
 const NavActions: React.FC = () => {
 	const user = useAuthUser() as IUser;

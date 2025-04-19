@@ -22,15 +22,17 @@ const RootNavbar: React.FC = () => {
 		setMounted(true);
 	}, []);
 
-	if (!mounted) return null; // or a loading state
+	if (!mounted) return null;
 
 	return (
-		<header className="py-3 md:py-4 border">
+		<header className="py-3 md:py-4 border-b">
 			<div className="container">
 				<nav className="flex items-center justify-between gap-6">
 					<div className="flex items-center gap-3">
 						<NavItemsMobileMode />
-						<Logo />
+						<Link href="/">
+							<Logo />
+						</Link>
 					</div>
 
 					{/* Nav Items */}

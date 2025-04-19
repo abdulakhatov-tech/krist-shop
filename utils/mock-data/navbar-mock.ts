@@ -1,4 +1,12 @@
-import { Heart, Search, ShoppingBasket } from "lucide-react";
+import {
+	Heart,
+	LayoutDashboard,
+	LogOut,
+	Search,
+	ShoppingBasket,
+	ShoppingCart,
+	User,
+} from "lucide-react";
 
 import type { ComponentType, SVGProps } from "react";
 
@@ -34,7 +42,7 @@ export const navItems: NavItemType[] = [
 	{
 		_id: "4",
 		path: "/contact-us",
-		title: "Contact Us",
+		title: "Contact",
 	},
 ];
 
@@ -56,5 +64,38 @@ export const navActions: NavActionType[] = [
 		Icon: ShoppingBasket,
 		title: "Shopping Cart",
 		type: "shopping-cart",
+	},
+];
+
+export const userAvatarItems = [
+	{
+		name: "Dashboard",
+		icon: LayoutDashboard,
+		link: "/dashboard",
+		allowedRoles: ["admin", "seller"],
+	},
+	{
+		name: "Profile",
+		icon: User,
+		link: "/profile",
+		allowedRoles: ["admin", "seller", "customer"],
+	},
+	{
+		name: "Shopping Cart",
+		icon: ShoppingCart,
+		link: "/cart",
+		allowedRoles: ["admin", "seller", "customer"],
+	},
+	{
+		name: "Favorites",
+		icon: Heart,
+		link: "/wishlist",
+		allowedRoles: ["admin", "seller", "customer"],
+	},
+	{
+		name: "Logout",
+		icon: LogOut,
+		link: "/logout",
+		allowedRoles: ["admin", "seller", "customer"],
 	},
 ];
