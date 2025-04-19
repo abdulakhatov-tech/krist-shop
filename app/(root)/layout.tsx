@@ -1,6 +1,5 @@
 import { CheckoutSuccessModal } from "@/common/modals";
 import { RootFooter, RootNavbar } from "@/layouts";
-import { SuspenseLoading } from "@/tools";
 import type { Metadata } from "next";
 import type React from "react";
 import type { ReactNode } from "react";
