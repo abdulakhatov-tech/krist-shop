@@ -1,7 +1,12 @@
+import { SuspenseLoading } from "@/tools";
 import SignUpPageView from "@/views/auth/sign-up";
 
 const SignUpPage = () => {
-	return <SignUpPageView />;
+	return (
+		<SuspenseLoading mode="website">
+			<SignUpPageView />
+		</SuspenseLoading>
+	);
 };
 
 export default SignUpPage;

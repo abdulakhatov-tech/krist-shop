@@ -1,7 +1,12 @@
+import { SuspenseLoading } from "@/tools";
 import ForgotPasswordPageView from "@/views/auth/forgot-password";
 
 const ForgotPassword = () => {
-	return <ForgotPasswordPageView />;
+	return (
+		<SuspenseLoading mode="website">
+			<ForgotPasswordPageView />
+		</SuspenseLoading>
+	);
 };
 
 export default ForgotPassword;
