@@ -1,4 +1,6 @@
-"use client";
+export const dynamic = "force-dynamic";
+
+("use client");
 
 import { SuspenseLoading } from "@/tools";
 import ResetPasswordPageView from "@/views/auth/reset-password";
