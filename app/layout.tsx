@@ -4,7 +4,6 @@ import "./globals.css";
 import AppProviders from "@/providers";
 import "react-photo-view/dist/react-photo-view.css";
 import SignOut from "@/layouts/sign-out";
-import { SuspenseLoading } from "@/tools";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -46,7 +45,7 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				<AppProviders>
-					<SuspenseLoading mode="website">{children}</SuspenseLoading>
+					{children}
 					<SignOut />
 				</AppProviders>
 			</body>
