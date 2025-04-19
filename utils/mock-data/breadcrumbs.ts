@@ -28,3 +28,8 @@ export const profilePageLinks = [
 	{ id: "1", title: "Home", path: "/" },
 	{ id: "2", title: "My Profile", isActive: true },
 ];
+
+export const shopPageLinks = [
+	{ id: "1", title: "Home", path: "/" },
+	{ id: "2", title: "All Products", isActive: true },
+];

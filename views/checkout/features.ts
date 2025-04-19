@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -17,12 +17,6 @@ import { setShipping } from "@/redux/slices/coupon";
 import { checkoutFormSchema } from "@/schemas/checkout";
 import { useAxios } from "@/services/api/axios.service";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const DELIVERY_COSTS = {
-	courier: 5,
-	postal: 10,
-	pickup: 0,
-} as const;
 
 const useCheckoutFeatures = () => {
 	const $axios = useAxios();
