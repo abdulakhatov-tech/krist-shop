@@ -2,6 +2,7 @@
 
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
@@ -11,7 +12,6 @@ import { setResetPasswordModalVisibility } from "@/redux/slices/modals/resetPass
 import { resetPasswordFormSchema } from "@/schemas/auth/resetPasswordFormSchema";
 import { useAuthService } from "@/services/auth/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
 
 const useResetPasswordPageViewFeatures = () => {
 	const router = useRouter();
@@ -21,14 +21,12 @@ const useResetPasswordPageViewFeatures = () => {
 	const [identifier, setIdentifier] = useState<string | null>(null);
 
 	useEffect(() => {
-		if (typeof window !== "undefined") {
-			const id = localStorage.getItem("identifier");
-			if (!id) {
-				localStorage.removeItem("identifier");
-				router.push("/auth/forgot-password");
-			} else {
-				setIdentifier(id);
-			}
+		const id = localStorage.getItem("identifier");
+		if (!id) {
+			localStorage.removeItem("identifier");
+			router.push("/auth/forgot-password");
+		} else {
+			setIdentifier(id);
 		}
 	}, [router]);
 
@@ -63,9 +61,7 @@ const useResetPasswordPageViewFeatures = () => {
 				dispatch(setResetPasswordModalVisibility(true));
 				reset();
 
-				if (typeof window !== "undefined") {
-					localStorage.removeItem("identifier");
-				}
+				localStorage.removeItem("identifier");
 			}
 		} catch (error) {
 			if (error instanceof AxiosError) {
