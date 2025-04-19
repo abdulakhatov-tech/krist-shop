@@ -1,6 +1,4 @@
-export const dynamic = "force-dynamic";
-
-("use client");
+"use client";
 
 import { SuspenseLoading } from "@/tools";
 import SignUpPageView from "@/views/auth/sign-up";
