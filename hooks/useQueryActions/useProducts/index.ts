@@ -7,6 +7,7 @@ import type { IProduct } from "@/interfaces/product.interface";
 import type { productFormSchema } from "@/schemas/product";
 import {
 	type FetchProductsParams,
+	type FetchShopProductsParams,
 	useProductsService,
 } from "@/services/products/products.service";
 
@@ -16,6 +17,17 @@ export const useProducts = (params: FetchProductsParams = {}) => {
 	return useQuery({
 		queryKey: ["products", params],
 		queryFn: () => fetchProducts(params),
+		staleTime: 1000 * 60 * 5,
+		retry: 2,
+	});
+};
+
+export const useShopProducts = (params: FetchShopProductsParams = {}) => {
+	const { fetchShopProducts } = useProductsService();
+
+	return useQuery({
+		queryKey: ["products", params],
+		queryFn: () => fetchShopProducts(params),
 		staleTime: 1000 * 60 * 5,
 		retry: 2,
 	});

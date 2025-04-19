@@ -14,6 +14,15 @@ export interface FetchProductsParams {
 	subcategory?: string;
 }
 
+export interface FetchShopProductsParams {
+	page?: number;
+	limit?: number;
+	minPrice?: number;
+	maxPrice?: number;
+	sortBy?: string;
+	subcategoryIds?: string[];
+}
+
 interface PaginatedResponse<T> {
 	success: boolean;
 	message: string;
@@ -27,6 +36,20 @@ const createProductsService = ($axios: AxiosInstance) => ({
 	): Promise<PaginatedResponse<IProduct>> {
 		try {
 			const { data } = await $axios.get("/products", { params });
+			return data;
+		} catch (error) {
+			if (isAxiosError(error)) {
+				throw new Error(error?.response?.data?.message);
+			}
+			throw new Error("Failed to fetch products.");
+		}
+	},
+
+	async fetchShopProducts(
+		params: FetchShopProductsParams,
+	): Promise<PaginatedResponse<IProduct>> {
+		try {
+			const { data } = await $axios.get("/products/shop", { params });
 			return data;
 		} catch (error) {
 			if (isAxiosError(error)) {

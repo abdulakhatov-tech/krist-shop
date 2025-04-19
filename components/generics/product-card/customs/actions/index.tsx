@@ -43,7 +43,6 @@ const ActionButtons: FC<{
 	const exisitingProductInCart = cart?.find(
 		(cart: ICart) => cart.product.id === product.id,
 	);
-	console.log(exisitingProductInCart, "exisitingProductInCart");
 
 	const handleWishlist = async () => {
 		if (!isAuthenticated) {
