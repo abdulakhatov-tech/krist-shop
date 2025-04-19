@@ -41,7 +41,7 @@ const FilterByPrice = () => {
 	};
 
 	return (
-		<div className="pb-4">
+		<div className="pb-6">
 			<h3 className="text-xl font-semibold mb-3">Filter By Price</h3>
 
 			<Slider
@@ -52,11 +52,11 @@ const FilterByPrice = () => {
 				step={1}
 			/>
 
-			<h4 className="text-black mt-2 text-[16px] font-semibold">
+			<h4 className="text-black mt-4 text-[16px] font-semibold">
 				Price: {formatPrice(range[0])} - {formatPrice(range[1])}
 			</h4>
 
-			<Button onClick={applyFilter} disabled={isPending} className="mt-2">
+			<Button onClick={applyFilter} disabled={isPending} className="mt-4">
 				{isPending ? "Applying..." : "Apply"}
 			</Button>
 		</div>

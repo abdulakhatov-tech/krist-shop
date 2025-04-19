@@ -81,7 +81,7 @@ const FilterByCategory = () => {
 	}, []);
 
 	return (
-		<div className="pb-4">
+		<div className="pb-6">
 			<h3 className="text-xl font-semibold mb-3">Categories</h3>
 
 			<Accordion
